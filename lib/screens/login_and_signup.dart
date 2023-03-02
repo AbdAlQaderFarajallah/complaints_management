@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-
+import '../widgets/input_text_field.dart';
 import '../widgets/signUp_icon.dart';
 // import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -73,9 +73,7 @@ class _LoginAndSignupPageState extends State<LoginAndSignupPage>
                   "Complaints Management System",
                   style: TextStyle(color: Colors.white, fontSize: 20),
                 ),
-                const SizedBox(
-                  height: 8,
-                ),
+                const SizedBox(height: 8),
                 Expanded(
                   flex: 1,
                   child: Container(
@@ -141,45 +139,16 @@ class _LoginAndSignupPageState extends State<LoginAndSignupPage>
                               //
                               ListView(
                                 children: [
-                                  TextField(
-                                    controller: _emailTextController,
-                                    keyboardType: TextInputType.emailAddress,
-                                    decoration: const InputDecoration(
-                                      prefixIcon: Icon(Icons.email),
-                                      prefixIconColor: Color(0xFF6589FF),
-                                      border: UnderlineInputBorder(),
-                                      hintText: "Enter email",
-                                    ),
+                                  InputTextField(
+                                    icon: Icons.email,
+                                    hintText: 'Enter email',
+                                    textController: _emailTextController,
                                   ),
                                   const SizedBox(height: 10),
-                                  TextFormField(
-                                    controller: _passwordTextController,
-                                    keyboardType: TextInputType.visiblePassword,
-                                    obscureText: !isVisible,
-                                    decoration: InputDecoration(
-                                      prefixIcon: const Icon(Icons.lock),
-                                      prefixIconColor: const Color(0xFF6589FF),
-                                      border: const UnderlineInputBorder(),
-                                      hintText: "password",
-                                      suffixIcon: IconButton(
-                                        onPressed: () {
-                                          setState(() {
-                                            print(isVisible);
-                                            isVisible = !isVisible;
-                                            print(isVisible);
-                                          });
-                                        },
-                                        icon: isVisible
-                                            ? const Icon(
-                                                Icons.visibility,
-                                                color: Colors.grey,
-                                              )
-                                            : const Icon(
-                                                Icons.visibility_off,
-                                                color: Colors.grey,
-                                              ),
-                                      ),
-                                    ),
+                                  InputTextField(
+                                    icon: Icons.lock,
+                                    hintText: 'password',
+                                    textController: _passwordTextController,
                                   ),
                                   const SizedBox(height: 48),
                                   GestureDetector(
@@ -221,49 +190,28 @@ class _LoginAndSignupPageState extends State<LoginAndSignupPage>
                               //
                               Column(
                                 children: [
-                                  TextField(
-                                    controller: _nameTextController,
-                                    keyboardType: TextInputType.name,
-                                    decoration: const InputDecoration(
-                                      prefixIcon: Icon(Icons.email),
-                                      prefixIconColor: Color(0xFF6589FF),
-                                      border: UnderlineInputBorder(),
-                                      hintText: "Enter Email",
-                                    ),
+                                  InputTextField(
+                                    icon: Icons.email,
+                                    hintText: 'Enter Email',
+                                    textController: _emailTextController,
                                   ),
                                   const SizedBox(height: 10),
-                                  TextField(
-                                    controller: _emailTextController,
-                                    keyboardType: TextInputType.emailAddress,
-                                    decoration: const InputDecoration(
-                                      prefixIcon: Icon(Icons.person),
-                                      prefixIconColor: Color(0xFF6589FF),
-                                      border: UnderlineInputBorder(),
-                                      hintText: "Enter Name",
-                                    ),
+                                  InputTextField(
+                                    icon: Icons.person,
+                                    hintText: 'Enter Name',
+                                    textController: _nameTextController,
                                   ),
                                   const SizedBox(height: 10),
-                                  TextField(
-                                    controller: _emailTextController,
-                                    keyboardType: TextInputType.emailAddress,
-                                    decoration: const InputDecoration(
-                                      prefixIcon: Icon(Icons.lock),
-                                      prefixIconColor: Color(0xFF6589FF),
-                                      border: UnderlineInputBorder(),
-                                      hintText: "Password",
-                                    ),
+                                  InputTextField(
+                                    icon: Icons.lock,
+                                    hintText: 'Password',
+                                    textController: _passwordTextController,
                                   ),
                                   const SizedBox(height: 10),
-                                  TextFormField(
-                                    controller: _passwordTextController,
-                                    keyboardType: TextInputType.visiblePassword,
-                                    obscureText: !isVisible,
-                                    decoration: InputDecoration(
-                                      prefixIcon: const Icon(Icons.lock),
-                                      prefixIconColor: const Color(0xFF6589FF),
-                                      border: const UnderlineInputBorder(),
-                                      hintText: "Confirm password",
-                                    ),
+                                  InputTextField(
+                                    icon: Icons.lock,
+                                    hintText: 'Confirm password',
+                                    textController: _passwordTextController,
                                   ),
                                   const SizedBox(height: 30),
                                   GestureDetector(
@@ -298,33 +246,16 @@ class _LoginAndSignupPageState extends State<LoginAndSignupPage>
                                   ),
                                   const SizedBox(height: 24),
                                   Row(
-                                    children: const [
-                                      Expanded(
-                                        child: Divider(
-                                          indent: 10,
-                                          color: Colors.grey,
-                                          thickness: 1,
-                                          endIndent: 10,
-                                        ),
-                                      ),
-                                      Text(
-                                        "OR",
-                                        style: TextStyle(color: Colors.grey),
-                                      ),
-                                      Expanded(
-                                        child: Divider(
-                                          indent: 10,
-                                          color: Colors.grey,
-                                          thickness: 1,
-                                          endIndent: 10,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: const [
+                                        Text("OR",
+                                            style:
+                                                TextStyle(color: Colors.grey)),
+                                      ]),
                                   const SizedBox(height: 24),
                                   Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.center,
+                                    mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       SignUpIcon(name: 'images/Group1.svg'),
                                       const SizedBox(width: 50),
@@ -396,7 +327,4 @@ class _LoginAndSignupPageState extends State<LoginAndSignupPage>
 //   );
 //   if (status) Navigator.pushReplacementNamed(context, HomePage.id);
 // }
-
 }
-
-
