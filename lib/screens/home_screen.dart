@@ -1,5 +1,7 @@
+import 'package:complaints_management/screens/login_and_signup.dart';
 import 'package:flutter/material.dart';
 
+import '../api/controllers/auth_api_controller.dart';
 import '../widgets/box_widget.dart';
 import 'new_inbox_screen.dart';
 
@@ -39,13 +41,51 @@ class _HomePageState extends State<HomePage> {
                       ),
                       onPressed: () {},
                     ),
-                    CircleAvatar(
-                      radius: 24,
-                      backgroundColor: Colors.white,
-                      child: Image.asset(
-                        "images/person.png",
-                        height: 32,
-                        width: 32,
+                    InkWell(
+                      onTap: () {
+                         PopupMenuButton<int>(
+                          itemBuilder: (context) => [
+                            // popupmenu item 1
+                            PopupMenuItem(
+                              value: 1,
+                              // row has two child icon and text.
+                              child: Row(
+                                children: const [
+                                  Icon(Icons.star),
+                                  SizedBox(width: 10),
+                                  Text("Get The App")
+                                ],
+                              ),
+                            ),
+                            // popupmenu item 2
+                            PopupMenuItem(
+                              value: 2,
+                              child: Row(
+                                children: [
+                                  IconButton(
+                                      onPressed: () async {
+                                        await logout(context);
+                                      },
+                                      icon: const Icon(Icons.logout)),
+                                  const SizedBox(width: 10),
+                                  const Text("logout")
+                                ],
+                              ),
+                            ),
+                          ],
+                          offset: const Offset(0, 200),
+                          color: Colors.grey,
+                          elevation: 2,
+                        );
+                      },
+                      child: CircleAvatar(
+                        radius: 24,
+                        backgroundColor: Colors.white,
+                        child: Image.asset(
+                          "images/person.png",
+                          height: 32,
+                          width: 32,
+                        ),
                       ),
                     ),
                   ],
@@ -687,5 +727,11 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
     );
+  }
+
+  Future<void> logout(BuildContext context) async {
+    bool loggedOut = await AuthApiController().logout();
+    if (loggedOut)
+      Navigator.pushReplacementNamed(context, LoginAndSignupPage.id);
   }
 }

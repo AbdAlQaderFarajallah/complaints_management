@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import '../api/controllers/auth_api_controller.dart';
 import '../widgets/input_text_field.dart';
 import '../widgets/signUp_icon.dart';
+import 'home_screen.dart';
 // import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 // import '../api/controllers/auth_api_controller.dart';
@@ -75,7 +77,6 @@ class _LoginAndSignupPageState extends State<LoginAndSignupPage>
                 ),
                 const SizedBox(height: 8),
                 Expanded(
-                  flex: 1,
                   child: Container(
                     margin: const EdgeInsets.all(24),
                     padding: const EdgeInsets.all(24),
@@ -183,11 +184,13 @@ class _LoginAndSignupPageState extends State<LoginAndSignupPage>
                                   ),
                                 ],
                               ),
+
                               //
                               //
                               // Register
                               //
                               //
+
                               Column(
                                 children: [
                                   InputTextField(
@@ -215,7 +218,9 @@ class _LoginAndSignupPageState extends State<LoginAndSignupPage>
                                   ),
                                   const SizedBox(height: 30),
                                   GestureDetector(
-                                    onTap: () {},
+                                    onTap: () async {
+                                      await performRegister();
+                                    },
                                     child: Container(
                                       height: 50.0,
                                       width: 264,
@@ -280,9 +285,13 @@ class _LoginAndSignupPageState extends State<LoginAndSignupPage>
     );
   }
 
+
+
+  //****************************************************************************
+
   Future<void> performLogin() async {
     if (checkData()) {
-      // await login();
+      await login();
     }
   }
 
@@ -294,21 +303,27 @@ class _LoginAndSignupPageState extends State<LoginAndSignupPage>
     return false;
   }
 
-  // Future<void> login() async {
-  //   bool status = await AuthApiController().login(
-  //     context,
-  //     email: _emailTextController.text,
-  //     password: _passwordTextController.text,
-  //   );
-  //   if (status) Navigator.pushReplacementNamed(context, HomePage.id);
-  // }
-
-  //****************************************************************************
-  Future<void> performRegister() async {
-    if (checkDataRegister()) {
-      // await Register();
+  Future<void> login() async {
+    bool status = await AuthApiController().login(
+      context,
+      email: _emailTextController.text,
+      password: _passwordTextController.text,
+    );
+    if (status) {
+      Navigator.pushReplacementNamed(context, HomePage.id);
     }
   }
+
+  //****************************************************************************
+
+
+  Future<void> performRegister() async {
+    if (checkDataRegister()) {
+      await Register();
+    }
+  }
+
+
 
   bool checkDataRegister() {
     if (_emailTextController.text.isNotEmpty &&
@@ -318,13 +333,13 @@ class _LoginAndSignupPageState extends State<LoginAndSignupPage>
     return false;
   }
 
-// Future<void> Register() async {
-//   bool status = await AuthApiController().register(
-//     context,
-//     name: _nameTextController.text,
-//     email: _emailTextController.text,
-//     password: _passwordTextController.text,
-//   );
-//   if (status) Navigator.pushReplacementNamed(context, HomePage.id);
-// }
+Future<void> Register() async {
+  bool status = await AuthApiController().register(
+    context,
+    name: _nameTextController.text,
+    email: _emailTextController.text,
+    password: _passwordTextController.text,
+  );
+  if (status) Navigator.pushReplacementNamed(context, HomePage.id);
+}
 }

@@ -1,3 +1,4 @@
+import 'package:complaints_management/prefs/shared_pref_controller.dart';
 import 'package:complaints_management/screens/home_screen.dart';
 import 'package:complaints_management/screens/new_inbox_screen.dart';
 import 'package:flutter/material.dart';
@@ -5,7 +6,9 @@ import 'package:flutter/material.dart';
 import 'screens/login_and_signup.dart';
 import 'screens/splash_screen.dart';
 
-void main() {
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await SharedPrefController().initPref();
   runApp(const MyApp());
 }
 
@@ -16,7 +19,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: HomePage .id,
+      initialRoute: SplashPage .id,
       routes: {
         // TestPage.id: (context) => const TestPage(),
         SplashPage.id: (context) => const SplashPage(),

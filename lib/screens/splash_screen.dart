@@ -1,4 +1,6 @@
 import 'dart:async';
+import 'package:complaints_management/prefs/shared_pref_controller.dart';
+import 'package:complaints_management/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'login_and_signup.dart';
 
@@ -15,19 +17,20 @@ class _SplashPageState extends State<SplashPage>
     with SingleTickerProviderStateMixin {
   late AnimationController controller;
 
-
   @override
   void initState() {
     super.initState();
-    controller = AnimationController(vsync: this, duration: const Duration(seconds: 2));
+    controller =
+        AnimationController(vsync: this, duration: const Duration(seconds: 2));
     controller.forward();
     controller.addListener(() {
       setState(() {});
     });
-    Timer(
-      const Duration(seconds: 3),
-      () => Navigator.pushReplacementNamed(context, LoginAndSignupPage.id),
-    );
+    Timer(const Duration(seconds: 3), () {
+      String route =
+          SharedPrefController().loggedIn ? HomePage.id : LoginAndSignupPage.id;
+      Navigator.pushReplacementNamed(context, route);
+    });
   }
 
   @override
