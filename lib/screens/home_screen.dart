@@ -31,8 +31,8 @@ class _HomePageState extends State<HomePage> {
                   shrinkWrap: false,
                   children: [
                     Padding(
-                      padding:
-                          const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 20, vertical: 8),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -61,7 +61,7 @@ class _HomePageState extends State<HomePage> {
                               PopupMenuItem(
                                 value: 2,
                                 child: InkWell(
-                                  onTap: ()async {
+                                  onTap: () async {
                                     await logout(context);
                                   },
                                   child: Row(
@@ -99,7 +99,8 @@ class _HomePageState extends State<HomePage> {
 
                     //Search
                     Container(
-                      margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 20),
+                      margin: const EdgeInsets.symmetric(
+                          vertical: 8, horizontal: 20),
                       decoration: const BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.all(Radius.circular(50))),
@@ -126,13 +127,16 @@ class _HomePageState extends State<HomePage> {
                     Row(
                       children: [
                         BoxWidget(text: 'Inbox', num: 9, color: Colors.red),
-                        BoxWidget(text: 'Pending', num: 19, color: Colors.yellow)
+                        BoxWidget(
+                            text: 'Pending', num: 19, color: Colors.yellow)
                       ],
                     ),
                     Row(
                       children: [
-                        BoxWidget(text: 'In progress', num: 5, color: Colors.blue),
-                        BoxWidget(text: 'Completed', num: 39, color: Colors.green)
+                        BoxWidget(
+                            text: 'In progress', num: 5, color: Colors.blue),
+                        BoxWidget(
+                            text: 'Completed', num: 39, color: Colors.green)
                       ],
                     ),
 
@@ -169,13 +173,15 @@ class _HomePageState extends State<HomePage> {
                             padding: const EdgeInsets.all(8),
                             decoration: const BoxDecoration(
                               color: Colors.white,
-                              borderRadius: BorderRadius.all(Radius.circular(25)),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(25)),
                             ),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
                                     Row(
                                       children: [
@@ -265,7 +271,8 @@ class _HomePageState extends State<HomePage> {
                                   height: 8,
                                 ),
                                 Padding(
-                                  padding: const EdgeInsets.symmetric(horizontal: 24),
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 24),
                                   child: Row(
                                     children: [
                                       Container(
@@ -373,12 +380,13 @@ class _HomePageState extends State<HomePage> {
                     ),
                     !isClickOther
                         ? Container(
-                            margin:
-                                const EdgeInsets.only(left: 16, right: 16, bottom: 8),
+                            margin: const EdgeInsets.only(
+                                left: 16, right: 16, bottom: 8),
                             padding: const EdgeInsets.all(8),
                             decoration: const BoxDecoration(
                               color: Colors.white,
-                              borderRadius: BorderRadius.all(Radius.circular(25)),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(25)),
                             ),
                             child: Column(
                               children: [
@@ -418,12 +426,14 @@ class _HomePageState extends State<HomePage> {
                                           children: [
                                             const Text(
                                               "Today, 11:00 AM",
-                                              style: TextStyle(color: Colors.grey),
+                                              style:
+                                                  TextStyle(color: Colors.grey),
                                             ),
                                             IconButton(
                                               onPressed: () {},
                                               icon: const Icon(
-                                                Icons.arrow_forward_ios_outlined,
+                                                Icons
+                                                    .arrow_forward_ios_outlined,
                                                 color: Colors.grey,
                                               ),
                                             )
@@ -432,7 +442,8 @@ class _HomePageState extends State<HomePage> {
                                       ],
                                     ),
                                     const Padding(
-                                      padding: EdgeInsets.symmetric(horizontal: 24),
+                                      padding:
+                                          EdgeInsets.symmetric(horizontal: 24),
                                       child: Text(
                                         "Here we added the subject",
                                         style: TextStyle(
@@ -445,7 +456,8 @@ class _HomePageState extends State<HomePage> {
                                       height: 2,
                                     ),
                                     const Padding(
-                                      padding: EdgeInsets.symmetric(horizontal: 24),
+                                      padding:
+                                          EdgeInsets.symmetric(horizontal: 24),
                                       child: Text(
                                         "And here excerpt of the mail, can add to this location. And we can do more to this like add multi images",
                                         overflow: TextOverflow.ellipsis,
@@ -512,12 +524,14 @@ class _HomePageState extends State<HomePage> {
                                           children: [
                                             const Text(
                                               "Today, 11:00 AM",
-                                              style: TextStyle(color: Colors.grey),
+                                              style:
+                                                  TextStyle(color: Colors.grey),
                                             ),
                                             IconButton(
                                               onPressed: () {},
                                               icon: const Icon(
-                                                Icons.arrow_forward_ios_outlined,
+                                                Icons
+                                                    .arrow_forward_ios_outlined,
                                                 color: Colors.grey,
                                               ),
                                             )
@@ -526,7 +540,8 @@ class _HomePageState extends State<HomePage> {
                                       ],
                                     ),
                                     const Padding(
-                                      padding: EdgeInsets.symmetric(horizontal: 24),
+                                      padding:
+                                          EdgeInsets.symmetric(horizontal: 24),
                                       child: Text(
                                         "Here we added the subject",
                                         style: TextStyle(
@@ -539,7 +554,8 @@ class _HomePageState extends State<HomePage> {
                                       height: 2,
                                     ),
                                     const Padding(
-                                      padding: EdgeInsets.symmetric(horizontal: 24),
+                                      padding:
+                                          EdgeInsets.symmetric(horizontal: 24),
                                       child: Text(
                                         "And here excerpt of the mail, can add to this location. And we can do more to this like add multi images",
                                         overflow: TextOverflow.ellipsis,
@@ -560,7 +576,8 @@ class _HomePageState extends State<HomePage> {
                           )
                         : const SizedBox(),
                     const Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                       child: Text(
                         "Tags",
                         style: TextStyle(
@@ -571,7 +588,8 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
                     Container(
-                      margin: const EdgeInsets.only(left: 16, right: 16, bottom: 8),
+                      margin:
+                          const EdgeInsets.only(left: 16, right: 16, bottom: 8),
                       padding: const EdgeInsets.all(16),
                       decoration: const BoxDecoration(
                         color: Colors.white,
@@ -583,7 +601,8 @@ class _HomePageState extends State<HomePage> {
                             children: [
                               Expanded(
                                 child: Container(
-                                  margin: const EdgeInsets.only(left: 8, bottom: 8),
+                                  margin:
+                                      const EdgeInsets.only(left: 8, bottom: 8),
                                   padding: const EdgeInsets.symmetric(
                                       horizontal: 16, vertical: 8),
                                   decoration: const BoxDecoration(
@@ -600,7 +619,8 @@ class _HomePageState extends State<HomePage> {
                               ),
                               Expanded(
                                 child: Container(
-                                  margin: const EdgeInsets.only(left: 8, bottom: 8),
+                                  margin:
+                                      const EdgeInsets.only(left: 8, bottom: 8),
                                   padding: const EdgeInsets.symmetric(
                                       horizontal: 16, vertical: 8),
                                   decoration: const BoxDecoration(
@@ -617,7 +637,8 @@ class _HomePageState extends State<HomePage> {
                               ),
                               Expanded(
                                 child: Container(
-                                  margin: const EdgeInsets.only(left: 8, bottom: 8),
+                                  margin:
+                                      const EdgeInsets.only(left: 8, bottom: 8),
                                   padding: const EdgeInsets.symmetric(
                                       horizontal: 16, vertical: 8),
                                   decoration: const BoxDecoration(
@@ -692,7 +713,6 @@ class _HomePageState extends State<HomePage> {
                         ),
                       ],
                     ),
-
                   ],
                 ),
               ),

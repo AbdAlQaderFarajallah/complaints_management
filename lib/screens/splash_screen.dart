@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:complaints_management/prefs/shared_pref_controller.dart';
 import 'package:complaints_management/screens/home_screen.dart';
+import 'package:complaints_management/screens/shimmer_animation.dart';
 import 'package:flutter/material.dart';
 import 'login_and_signup.dart';
 
@@ -28,7 +29,7 @@ class _SplashPageState extends State<SplashPage>
     });
     Timer(const Duration(seconds: 3), () {
       String route =
-          SharedPrefController().loggedIn ? HomePage.id : LoginAndSignupPage.id;
+          SharedPrefController().loggedIn ? ShimmerAnimation.id : LoginAndSignupPage.id;
       Navigator.pushReplacementNamed(context, route);
     });
   }
