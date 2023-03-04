@@ -1,4 +1,5 @@
 import 'package:complaints_management/screens/login_and_signup.dart';
+import 'package:complaints_management/screens/profile_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../api/controllers/auth_api_controller.dart';
@@ -46,9 +47,25 @@ class _HomePageState extends State<HomePage> {
                           ),
                           PopupMenuButton<int>(
                             itemBuilder: (context) => [
-                              // popupmenu item 1
                               PopupMenuItem(
                                 value: 1,
+                                child: InkWell(
+                                  onTap: () {
+                                    Navigator.pushNamed(
+                                        context, ProfileScreen.id);
+                                  },
+                                  child: Row(
+                                    children: const [
+                                      Icon(Icons.person),
+                                      SizedBox(width: 10),
+                                      Text("Profile")
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              // popupmenu item 2
+                              PopupMenuItem(
+                                value: 2,
                                 child: Row(
                                   children: const [
                                     Icon(Icons.language),
@@ -57,9 +74,9 @@ class _HomePageState extends State<HomePage> {
                                   ],
                                 ),
                               ),
-                              // popupmenu item 2
+                              // popupmenu item 3
                               PopupMenuItem(
-                                value: 2,
+                                value: 3,
                                 child: InkWell(
                                   onTap: () async {
                                     await logout(context);

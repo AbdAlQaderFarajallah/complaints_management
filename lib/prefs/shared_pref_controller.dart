@@ -1,7 +1,7 @@
 import 'package:complaints_management/models/user_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-enum PrefKeys { token, loggedIn }
+enum PrefKeys { token, loggedIn, name, email, role }
 
 class SharedPrefController {
   static final SharedPrefController _instance = SharedPrefController._();
@@ -22,6 +22,12 @@ class SharedPrefController {
     await _sharedPreferences.setBool(PrefKeys.loggedIn.toString(), true);
     await _sharedPreferences.setString(
         PrefKeys.token.toString(), 'Bearer ${user.token}');
+    await _sharedPreferences.setString(
+        PrefKeys.name.toString(), user.user!.name!);
+    await _sharedPreferences.setString(
+        PrefKeys.email.toString(), user.user!.email!);
+    await _sharedPreferences.setString(
+        PrefKeys.role.toString(), user.user!.role!.name!);
   }
 
   String get token =>
@@ -29,6 +35,15 @@ class SharedPrefController {
 
   bool get loggedIn =>
       _sharedPreferences.getBool(PrefKeys.loggedIn.toString()) ?? false;
+
+  String get name =>
+      _sharedPreferences.getString(PrefKeys.name.toString()) ?? '';
+
+  String get email =>
+      _sharedPreferences.getString(PrefKeys.email.toString()) ?? '';
+
+  String get role =>
+      _sharedPreferences.getString(PrefKeys.role.toString()) ?? '';
 
   Future<bool> clear() async {
     return await _sharedPreferences.clear();
