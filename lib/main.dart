@@ -3,6 +3,7 @@ import 'package:complaints_management/screens/home_screen.dart';
 import 'package:complaints_management/screens/new_inbox_screen.dart';
 import 'package:flutter/material.dart';
 
+import 'screens/category_screen.dart';
 import 'screens/login_and_signup.dart';
 import 'screens/sender_search_screen.dart';
 import 'screens/splash_screen.dart';
@@ -20,7 +21,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: SenderSearchScreen .id,
+      initialRoute: CategoryPage .id,
       routes: {
         // TestPage.id: (context) => const TestPage(),
         SplashPage.id: (context) => const SplashPage(),
@@ -29,7 +30,7 @@ class MyApp extends StatelessWidget {
         // DetailsPage.id: (context) => const DetailsPage(),
         NewInboxPage.id: (context) => const NewInboxPage(),
         SenderSearchScreen.id: (context) => const SenderSearchScreen(),
-        // CategoryPage.id: (context) => const CategoryPage(),
+        CategoryPage.id: (context) => const CategoryPage(),
         // TagsPage.id: (context) => const TagsPage(),
         // StatusPage.id: (context) => const StatusPage(),
         // SearchPage.id: (context) => const SearchPage(),
