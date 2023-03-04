@@ -28,6 +28,8 @@ class _LoginAndSignupPageState extends State<LoginAndSignupPage>
   late TextEditingController _passwordTextController;
   late TextEditingController _nameTextController;
 
+  bool isLoading = false;
+
   @override
   void initState() {
     super.initState();
@@ -153,35 +155,29 @@ class _LoginAndSignupPageState extends State<LoginAndSignupPage>
                                     textController: _passwordTextController,
                                   ),
                                   const SizedBox(height: 48),
-                                  GestureDetector(
-                                    onTap: () async {
-                                      await performLogin();
-                                    },
-                                    child: Container(
-                                      height: 50.0,
-                                      width: 264,
-                                      decoration: const BoxDecoration(
-                                        gradient: LinearGradient(
-                                          begin: Alignment.centerLeft,
-                                          end: Alignment.centerRight,
-                                          colors: [
-                                            Color(0xFF6589FF),
-                                            Color(0xFF003AFC),
-                                          ],
-                                        ),
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(30)),
-                                      ),
-                                      child: const Center(
-                                        child: Text(
-                                          'Login',
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              color: Colors.white,
-                                              fontSize: 16),
-                                        ),
-                                      ),
-                                    ),
+                                  SizedBox(
+                                    height: 50.0,
+                                    width: 264,
+                                    child: ElevatedButton(
+                                        style: ElevatedButton.styleFrom(
+                                            padding: const EdgeInsets.all(5),
+                                            backgroundColor:
+                                                const Color(0xFF003AFC),
+                                            shape: const StadiumBorder()),
+                                        onPressed: () async {
+                                          if(isLoading) return ;
+                                          setState(() {
+                                            isLoading = true ;
+                                          });
+                                          await Future.delayed(const Duration(seconds: 2) , () async => await performLogin());
+                                          setState(() {
+                                            isLoading = false ;
+                                          });
+                                        },
+                                        child: isLoading
+                                            ? const CircularProgressIndicator(
+                                                color: Colors.white)
+                                            : const Text('LOGIN')),
                                   ),
                                 ],
                               ),
@@ -218,37 +214,29 @@ class _LoginAndSignupPageState extends State<LoginAndSignupPage>
                                     textController: _passwordTextController,
                                   ),
                                   const SizedBox(height: 30),
-                                  GestureDetector(
-                                    onTap: () async {
-                                      await performRegister();
-                                    },
-                                    child: Container(
-                                      height: 50.0,
-                                      width: 264,
-                                      decoration: const BoxDecoration(
-                                        gradient: LinearGradient(
-                                          begin: Alignment.centerLeft,
-                                          end: Alignment.centerRight,
-                                          colors: [
-                                            Color(0xFF6589FF),
-                                            Color(0xFF003AFC),
-                                          ],
-                                        ),
-                                        borderRadius: BorderRadius.all(
-                                          Radius.circular(30),
-                                        ),
-                                      ),
-                                      child: const Center(
-                                        child: Text(
-                                          'Sign Up',
-                                          style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.white,
-                                            fontSize: 16,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
+                                  SizedBox(
+                                    height: 50.0,
+                                    width: 264,
+                                    child: ElevatedButton(
+                                        style: ElevatedButton.styleFrom(
+                                            padding: const EdgeInsets.all(5),
+                                            backgroundColor:
+                                            const Color(0xFF003AFC),
+                                            shape: const StadiumBorder()),
+                                        onPressed: () async {
+                                          if(isLoading) return ;
+                                          setState(() {
+                                            isLoading = true ;
+                                          });
+                                          await Future.delayed(const Duration(seconds: 2) , () async => await performRegister());
+                                          setState(() {
+                                            isLoading = false ;
+                                          });
+                                        },
+                                        child: isLoading
+                                            ? const CircularProgressIndicator(
+                                            color: Colors.white)
+                                            : const Text('SIGN UP')),
                                   ),
                                   const SizedBox(height: 24),
                                   Row(
@@ -286,8 +274,6 @@ class _LoginAndSignupPageState extends State<LoginAndSignupPage>
     );
   }
 
-
-
   //****************************************************************************
 
   Future<void> performLogin() async {
@@ -317,14 +303,11 @@ class _LoginAndSignupPageState extends State<LoginAndSignupPage>
 
   //****************************************************************************
 
-
   Future<void> performRegister() async {
     if (checkDataRegister()) {
       await Register();
     }
   }
-
-
 
   bool checkDataRegister() {
     if (_emailTextController.text.isNotEmpty &&
@@ -334,13 +317,13 @@ class _LoginAndSignupPageState extends State<LoginAndSignupPage>
     return false;
   }
 
-Future<void> Register() async {
-  bool status = await AuthApiController().register(
-    context,
-    name: _nameTextController.text,
-    email: _emailTextController.text,
-    password: _passwordTextController.text,
-  );
-  if (status) Navigator.pushReplacementNamed(context, HomePage.id);
-}
+  Future<void> Register() async {
+    bool status = await AuthApiController().register(
+      context,
+      name: _nameTextController.text,
+      email: _emailTextController.text,
+      password: _passwordTextController.text,
+    );
+    if (status) Navigator.pushReplacementNamed(context, HomePage.id);
+  }
 }
