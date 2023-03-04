@@ -41,43 +41,40 @@ class _HomePageState extends State<HomePage> {
                       ),
                       onPressed: () {},
                     ),
-                    InkWell(
-                      onTap: () {
-                         PopupMenuButton<int>(
-                          itemBuilder: (context) => [
-                            // popupmenu item 1
-                            PopupMenuItem(
-                              value: 1,
-                              // row has two child icon and text.
-                              child: Row(
-                                children: const [
-                                  Icon(Icons.star),
-                                  SizedBox(width: 10),
-                                  Text("Get The App")
-                                ],
-                              ),
-                            ),
-                            // popupmenu item 2
-                            PopupMenuItem(
-                              value: 2,
-                              child: Row(
-                                children: [
-                                  IconButton(
-                                      onPressed: () async {
-                                        await logout(context);
-                                      },
-                                      icon: const Icon(Icons.logout)),
-                                  const SizedBox(width: 10),
-                                  const Text("logout")
-                                ],
-                              ),
-                            ),
-                          ],
-                          offset: const Offset(0, 200),
-                          color: Colors.grey,
-                          elevation: 2,
-                        );
-                      },
+                    PopupMenuButton<int>(
+                      itemBuilder: (context) => [
+                        // popupmenu item 1
+                        PopupMenuItem(
+                          value: 1,
+                          child: Row(
+                            children: [
+                              IconButton(
+                                  onPressed: () {},
+                                  icon: const Icon(Icons.language)),
+                              const SizedBox(width: 10),
+                              const Text("Arabic")
+                            ],
+                          ),
+                        ),
+                        // popupmenu item 2
+                        PopupMenuItem(
+                          value: 2,
+                          child: Row(
+                            children: [
+                              IconButton(
+                                  onPressed: () async {
+                                    await logout(context);
+                                  },
+                                  icon: const Icon(Icons.logout_outlined)),
+                              const SizedBox(width: 10),
+                              const Text("logout")
+                            ],
+                          ),
+                        ),
+                      ],
+                      offset: const Offset(0, 60),
+                      color: Colors.white,
+                      elevation: 8,
                       child: CircleAvatar(
                         radius: 24,
                         backgroundColor: Colors.white,
