@@ -3,6 +3,7 @@ import 'package:complaints_management/screens/home_screen.dart';
 import 'package:complaints_management/screens/new_inbox_screen.dart';
 import 'package:complaints_management/screens/shimmer_animation.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import 'screens/category_screen.dart';
 import 'screens/login_and_signup.dart';
@@ -20,7 +21,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       initialRoute: SplashPage.id,
       routes: {

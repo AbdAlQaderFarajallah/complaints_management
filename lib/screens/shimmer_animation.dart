@@ -1,4 +1,7 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:shimmer/shimmer.dart';
 
 import 'home_screen.dart';
@@ -15,8 +18,16 @@ class ShimmerAnimation extends StatefulWidget {
 class _ShimmerAnimationState extends State<ShimmerAnimation> {
   @override
   void initState() {
-    Future.delayed(const Duration(seconds: 2),
-        () => Navigator.pushReplacementNamed(context, HomePage.id));
+    // Future.delayed(
+    //   const Duration(seconds: 2),
+    //   () => Get.to(() => const HomePage(),
+    //       transition: Transition.circularReveal),
+    //   // () => Navigator.pushReplacementNamed(context, HomePage.id),
+    // );
+    Timer(const Duration(milliseconds: 1500), () {
+      Get.to(() => const HomePage(),
+          transition: Transition.topLevel ,duration: const Duration(seconds: 4));
+    });
     super.initState();
   }
 
