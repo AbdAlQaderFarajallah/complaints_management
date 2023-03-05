@@ -14,6 +14,8 @@ class _NewInboxPageState extends State<NewInboxPage> {
   bool isClickTile = false;
   bool isClickActivity = false;
 
+  var resultCat = 'others';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -85,7 +87,7 @@ class _NewInboxPageState extends State<NewInboxPage> {
                       const SizedBox(height: 10),
                       InkWell(
                         onTap: () {
-                          Navigator.pushNamed(context, CategoryPage.id);
+                          _navigateAndDisplaySelection(context);
                         },
                         child: Expanded(
                           child: Row(
@@ -93,17 +95,17 @@ class _NewInboxPageState extends State<NewInboxPage> {
                             children: [
                               const Text(
                                 "Category",
-                                style:
-                                    TextStyle(color: Colors.black, fontSize: 16),
+                                style: TextStyle(
+                                    color: Colors.black, fontSize: 16),
                               ),
-                              Row(children: const [
+                              Row(children: [
                                 Text(
-                                  "Others",
-                                  style:
-                                      TextStyle(color: Colors.grey, fontSize: 15),
+                                  resultCat.toString(),
+                                  style: const TextStyle(
+                                      color: Colors.grey, fontSize: 15),
                                 ),
-                                SizedBox(width: 8),
-                                Icon(Icons.arrow_forward_ios_outlined,
+                                const SizedBox(width: 8),
+                                const Icon(Icons.arrow_forward_ios_outlined,
                                     color: Colors.grey),
                               ]),
                             ],
@@ -391,5 +393,17 @@ class _NewInboxPageState extends State<NewInboxPage> {
         ),
       ),
     );
+  }
+
+  Future<void> _navigateAndDisplaySelection(BuildContext context) async {
+    final result = await Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => const CategoryPage()),
+    );
+    if (!mounted) return;
+
+    resultCat = result;
+
+    setState(() {});
   }
 }
