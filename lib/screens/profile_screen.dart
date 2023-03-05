@@ -2,7 +2,7 @@ import 'package:complaints_management/prefs/shared_pref_controller.dart';
 import 'package:complaints_management/screens/user_update_screen.dart';
 import 'package:flutter/material.dart';
 
-import '../api/controllers/auth_api_controller.dart';
+import '../api/controllers/auth/auth_api_controller.dart';
 import 'login_and_signup.dart';
 
 class ProfileScreen extends StatefulWidget {

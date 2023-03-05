@@ -29,12 +29,10 @@ class _CategoryPageState extends State<CategoryPage> {
                           "Cancel",
                           style: TextStyle(color: Colors.blue, fontSize: 16),
                         )),
-                    TextButton(
-                        onPressed: () {},
-                        child: const Text(
-                          "Category",
-                          style: TextStyle(color: Colors.black, fontSize: 16),
-                        )),
+                    const Text(
+                      "Category",
+                      style: TextStyle(color: Colors.black, fontSize: 16),
+                    ),
                     TextButton(
                         onPressed: () {},
                         child: const Text(
@@ -63,10 +61,6 @@ class _CategoryPageState extends State<CategoryPage> {
                               style: TextStyle(color: Colors.black, fontSize: 18),
                             ),
                           ),
-                          Icon(
-                            Icons.check,
-                            color: Colors.blue,
-                          )
                         ],
                       ),
                       const Divider(thickness: 1, color: Colors.black54),
@@ -81,7 +75,6 @@ class _CategoryPageState extends State<CategoryPage> {
                               style: TextStyle(color: Colors.black, fontSize: 18),
                             ),
                           ),
-                          // Icon(Icons.check, color: Colors.blue,)
                         ],
                       ),
                       const Divider(thickness: 1, color: Colors.black54),
@@ -96,7 +89,6 @@ class _CategoryPageState extends State<CategoryPage> {
                               style: TextStyle(color: Colors.black, fontSize: 18),
                             ),
                           ),
-                          // Icon(Icons.check, color: Colors.blue,)
                         ],
                       ),
                       const Divider(thickness: 1, color: Colors.black54),
@@ -111,7 +103,6 @@ class _CategoryPageState extends State<CategoryPage> {
                               style: TextStyle(color: Colors.black, fontSize: 18),
                             ),
                           ),
-                          // Icon(Icons.check, color: Colors.blue,)
                         ],
                       ),
                     ],

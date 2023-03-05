@@ -1,8 +1,8 @@
 import 'dart:io';
 import 'package:http/http.dart' as http;
 
-import '../../prefs/shared_pref_controller.dart';
-import '../api_settings.dart';
+import '../../../prefs/shared_pref_controller.dart';
+import '../../api_settings.dart';
 
 class UserUpdateApiController {
   Future<bool> userUpdate({required String name}) async {

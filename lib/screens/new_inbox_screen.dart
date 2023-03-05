@@ -1,3 +1,4 @@
+import 'package:complaints_management/screens/category_screen.dart';
 import 'package:flutter/material.dart';
 
 class NewInboxPage extends StatefulWidget {
@@ -16,6 +17,7 @@ class _NewInboxPageState extends State<NewInboxPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xffF7F6FF),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Container(
@@ -50,6 +52,8 @@ class _NewInboxPageState extends State<NewInboxPage> {
                   ),
                 ),
                 Container(
+                  width: 378,
+                  height: 130,
                   margin: const EdgeInsets.only(left: 16, right: 16, bottom: 8),
                   padding: const EdgeInsets.all(18),
                   decoration: const BoxDecoration(
@@ -76,60 +80,42 @@ class _NewInboxPageState extends State<NewInboxPage> {
                           const Icon(Icons.error_outline, color: Colors.blue),
                         ],
                       ),
+                      const SizedBox(height: 10),
                       const Divider(thickness: 1, color: Colors.black54),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Row(children: const [
-                            Icon(
-                              Icons.mobile_friendly,
-                              color: Colors.grey,
-                            ),
-                            SizedBox(width: 8),
-                            Text(
-                              "Mobile",
-                              style:
-                                  TextStyle(color: Colors.grey, fontSize: 16),
-                            ),
-                          ]),
-                        ],
-                      ),
-                      const Divider(thickness: 1, color: Colors.black54),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          const Text(
-                            "Category",
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 16,
-                            ),
-                          ),
-                          Row(children: [
-                            const Text(
-                              "Others",
-                              style: TextStyle(
-                                color: Colors.grey,
-                                fontSize: 15,
+                      const SizedBox(height: 10),
+                      InkWell(
+                        onTap: () {
+                          Navigator.pushNamed(context, CategoryPage.id);
+                        },
+                        child: Expanded(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              const Text(
+                                "Category",
+                                style:
+                                    TextStyle(color: Colors.black, fontSize: 16),
                               ),
-                            ),
-                            SizedBox(
-                              width: 8,
-                            ),
-                            Icon(
-                              Icons.arrow_forward_ios_outlined,
-                              color: Colors.grey,
-                            ),
-                          ]),
-                        ],
+                              Row(children: const [
+                                Text(
+                                  "Others",
+                                  style:
+                                      TextStyle(color: Colors.grey, fontSize: 15),
+                                ),
+                                SizedBox(width: 8),
+                                Icon(Icons.arrow_forward_ios_outlined,
+                                    color: Colors.grey),
+                              ]),
+                            ],
+                          ),
+                        ),
                       ),
                     ],
                   ),
                 ),
                 Container(
                   margin: const EdgeInsets.only(left: 16, right: 16, bottom: 8),
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
                   decoration: const BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.all(Radius.circular(30)),
@@ -169,9 +155,7 @@ class _NewInboxPageState extends State<NewInboxPage> {
                             Icons.date_range,
                             color: Colors.blue,
                           ),
-                          const SizedBox(
-                            width: 8
-                          ),
+                          const SizedBox(width: 8),
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: const [
@@ -196,9 +180,7 @@ class _NewInboxPageState extends State<NewInboxPage> {
                             Icons.description_rounded,
                             color: Colors.blue,
                           ),
-                          const SizedBox(
-                            width: 8
-                          ),
+                          const SizedBox(width: 8),
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: const [
@@ -231,16 +213,12 @@ class _NewInboxPageState extends State<NewInboxPage> {
                     children: [
                       Row(
                         children: const [
-                          SizedBox(
-                            width: 8
-                          ),
+                          SizedBox(width: 8),
                           Icon(
                             Icons.numbers,
                             color: Colors.grey,
                           ),
-                          SizedBox(
-                            width: 8,
-                          ),
+                          SizedBox(width: 8),
                           Text(
                             "Tags",
                             style: TextStyle(
@@ -272,11 +250,9 @@ class _NewInboxPageState extends State<NewInboxPage> {
                     children: [
                       Row(
                         children: [
-                          const SizedBox(
-                            width: 8
-                          ),
+                          const SizedBox(width: 8),
                           const Icon(
-                            Icons.question_mark,
+                            Icons.arrow_circle_down,
                             color: Colors.grey,
                           ),
                           Container(
@@ -331,7 +307,7 @@ class _NewInboxPageState extends State<NewInboxPage> {
                         keyboardType: TextInputType.text,
                         decoration: const InputDecoration(
                           border: InputBorder.none,
-                          hintText: "Description",
+                          hintText: "Add Decision",
                         ),
                       ),
                     ],
@@ -393,7 +369,7 @@ class _NewInboxPageState extends State<NewInboxPage> {
                           },
                           decoration: InputDecoration(
                             hintText: "Add new activity...",
-                            prefixIcon: const Icon(Icons.search),
+                            prefixIcon: const Icon(Icons.person),
                             suffixIcon: IconButton(
                               onPressed: () {},
                               icon: const Icon(

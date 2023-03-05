@@ -5,5 +5,6 @@ class ApiSettings {
   static const logout = '$_baseUrl/logout';
   static const userInfo = '$_baseUrl/user';
   static const userUpdate = '$_baseUrl/user/update';
+  static const allCategories = '$_baseUrl/categories';
 
 }

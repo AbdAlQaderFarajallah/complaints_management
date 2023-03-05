@@ -1,9 +1,9 @@
-import 'package:complaints_management/api/controllers/user_update_api_controller.dart';
+import 'package:complaints_management/api/controllers/current_user/user_update_api_controller.dart';
 import 'package:complaints_management/screens/home_screen.dart';
 
 import 'package:flutter/material.dart';
 
-import '../api/controllers/user_info_api_controller.dart';
+import '../api/controllers/current_user/user_info_api_controller.dart';
 import '../prefs/shared_pref_controller.dart';
 
 class UserUpdateScreen extends StatefulWidget {

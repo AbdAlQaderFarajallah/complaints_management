@@ -1,7 +1,7 @@
 import 'package:complaints_management/screens/shimmer_animation.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import '../api/controllers/auth_api_controller.dart';
+import '../api/controllers/auth/auth_api_controller.dart';
 import '../widgets/input_text_field.dart';
 import '../widgets/signUp_icon.dart';
 import 'home_screen.dart';

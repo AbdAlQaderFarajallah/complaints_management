@@ -2,7 +2,7 @@ import 'package:complaints_management/screens/login_and_signup.dart';
 import 'package:complaints_management/screens/profile_screen.dart';
 import 'package:flutter/material.dart';
 
-import '../api/controllers/auth_api_controller.dart';
+import '../api/controllers/auth/auth_api_controller.dart';
 import '../widgets/box_widget.dart';
 import 'new_inbox_screen.dart';
 

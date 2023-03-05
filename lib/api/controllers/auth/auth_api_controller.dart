@@ -3,9 +3,9 @@ import 'dart:io';
 import 'package:complaints_management/models/user_model.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import '../../helpers/helpers.dart';
-import '../../prefs/shared_pref_controller.dart';
-import '../api_settings.dart';
+import '../../../helpers/helpers.dart';
+import '../../../prefs/shared_pref_controller.dart';
+import '../../api_settings.dart';
 
 class AuthApiController with Helpers {
   Future<bool> login(BuildContext context,

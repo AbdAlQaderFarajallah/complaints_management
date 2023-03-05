@@ -4,8 +4,8 @@ import 'package:complaints_management/models/user_model.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 
-import '../../prefs/shared_pref_controller.dart';
-import '../api_settings.dart';
+import '../../../prefs/shared_pref_controller.dart';
+import '../../api_settings.dart';
 
 class UserInfoApiController {
   Future<bool> userInfo(BuildContext context) async {
