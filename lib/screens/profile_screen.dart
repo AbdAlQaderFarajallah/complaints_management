@@ -1,4 +1,5 @@
 import 'package:complaints_management/prefs/shared_pref_controller.dart';
+import 'package:complaints_management/screens/user_update_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../api/controllers/auth_api_controller.dart';
@@ -23,15 +24,23 @@ class _ProfileScreenState extends State<ProfileScreen> {
         margin: const EdgeInsets.symmetric(vertical: 50),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Center(
                 child:
                     Image.asset("images/person.png", width: 150, height: 150)),
             const SizedBox(height: 20),
-            Text('Name : ${SharedPrefController().name}',
-                style:
-                    const TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text('Name : ${SharedPrefController().name}',
+                    style: const TextStyle(
+                        fontWeight: FontWeight.bold, fontSize: 20)),
+                const SizedBox(width: 20),
+                TextButton(onPressed: () {
+                  Navigator.pushNamed(context, UserUpdateScreen.id);
+                }, child: const Text('Edit'))
+              ],
+            ),
             const SizedBox(height: 20),
             Text('Email : ${SharedPrefController().email}',
                 style:
@@ -40,14 +49,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
             Text('Role : ${SharedPrefController().role}',
                 style:
                     const TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
-            const SizedBox(height: 20),
+            const SizedBox(height: 50),
             SizedBox(
               width: 150,
               child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
                       padding: const EdgeInsets.all(5),
-                      backgroundColor:
-                      const Color(0xFF003AFC),
+                      backgroundColor: const Color(0xFF003AFC),
                       shape: const StadiumBorder()),
                   onPressed: () async {
                     await logout(context);

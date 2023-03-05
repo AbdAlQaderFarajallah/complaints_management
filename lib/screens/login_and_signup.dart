@@ -44,6 +44,7 @@ class _LoginAndSignupPageState extends State<LoginAndSignupPage>
   void dispose() {
     _emailTextController.dispose();
     _passwordTextController.dispose();
+    _nameTextController.dispose();
     _pageController.dispose();
     super.dispose();
   }

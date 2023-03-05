@@ -3,6 +3,7 @@ class ApiSettings {
   static const login = '$_baseUrl/login';
   static const register = '$_baseUrl/register';
   static const logout = '$_baseUrl/logout';
+  static const userInfo = '$_baseUrl/user';
   static const userUpdate = '$_baseUrl/user/update';
 
 }

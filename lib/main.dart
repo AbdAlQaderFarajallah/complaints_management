@@ -3,6 +3,7 @@ import 'package:complaints_management/screens/home_screen.dart';
 import 'package:complaints_management/screens/new_inbox_screen.dart';
 import 'package:complaints_management/screens/profile_screen.dart';
 import 'package:complaints_management/screens/shimmer_animation.dart';
+import 'package:complaints_management/screens/user_update_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -39,6 +40,7 @@ class MyApp extends StatelessWidget {
         // StatusPage.id: (context) => const StatusPage(),
         // SearchPage.id: (context) => const SearchPage(),
          ProfileScreen.id: (context) => const ProfileScreen(),
+         UserUpdateScreen.id: (context) => const UserUpdateScreen(),
       },
     );
   }

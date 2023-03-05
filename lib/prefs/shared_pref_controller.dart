@@ -21,13 +21,21 @@ class SharedPrefController {
   Future<void> save({required UserModel user}) async {
     await _sharedPreferences.setBool(PrefKeys.loggedIn.toString(), true);
     await _sharedPreferences.setString(
-        PrefKeys.token.toString(), 'Bearer ${user.token}');
+        PrefKeys.token.toString(), 'Bearer ${user.token!}');
     await _sharedPreferences.setString(
         PrefKeys.name.toString(), user.user!.name!);
     await _sharedPreferences.setString(
         PrefKeys.email.toString(), user.user!.email!);
     await _sharedPreferences.setString(
         PrefKeys.role.toString(), user.user!.role!.name!);
+  }
+
+  Future<void> remove({required String key}) async {
+    await _sharedPreferences.remove(key);
+  }
+
+  Future<void> saveName({required String key}) async {
+    await _sharedPreferences.setString(PrefKeys.name.toString(), key);
   }
 
   String get token =>
