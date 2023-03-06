@@ -1,8 +1,10 @@
 import 'package:complaints_management/api/controllers/tags/all_tags_api_controller.dart';
+import 'package:complaints_management/api/controllers/tags/create_tag_api_controller.dart';
 import 'package:complaints_management/widgets/tags_widget.dart';
 import 'package:flutter/material.dart';
 
 import '../models/all_tags.dart';
+import '../widgets/input_text_field.dart';
 
 class TagsPage extends StatefulWidget {
   static const String id = "TagsPage";
@@ -112,28 +114,39 @@ class _TagsPageState extends State<TagsPage> {
               },
             ),
             Container(
-              margin: const EdgeInsets.only(
-                left: 16,
-                right: 16,
-              ),
-              decoration: const BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.all(Radius.circular(50)),
-              ),
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                child: TextField(
-                  controller: textEditingController,
-                  decoration: const InputDecoration(
-                    hintText: "Add new tag...",
-                    border: InputBorder.none,
+              height: 54,
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              color: Colors.white,
+              child: Row(
+                children: [
+                  Expanded(
+                    flex: 5,
+                    child: InputTextField(
+                        icon: Icons.add,
+                        hintText: "Add Tag",
+                        textController: textEditingController),
                   ),
-                ),
+                  Expanded(
+                    flex: 1,
+                    child: TextButton(
+                        onPressed: () async {
+                          await createTag();
+                          Navigator.pop(context);
+                        },
+                        child: const Text('SAVE')),
+                  )
+                ],
               ),
             ),
           ],
         ),
       ),
+    );
+  }
+
+  Future<void> createTag() async {
+    await CreateTagApiController().createTag(
+      name: textEditingController.text,
     );
   }
 }
