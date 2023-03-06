@@ -7,5 +7,5 @@ class ApiSettings {
   static const userUpdate = '$_baseUrl/user/update';
   static const allCategories = '$_baseUrl/categories';
   static const createCategories = '$_baseUrl/categories';
-
+  static const allTags = '$_baseUrl/tags';
 }
