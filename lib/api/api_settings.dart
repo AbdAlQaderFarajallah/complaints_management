@@ -8,4 +8,5 @@ class ApiSettings {
   static const allCategories = '$_baseUrl/categories';
   static const createCategories = '$_baseUrl/categories';
   static const allTags = '$_baseUrl/tags';
+  static const allStatuses = '$_baseUrl/statuses';
 }
