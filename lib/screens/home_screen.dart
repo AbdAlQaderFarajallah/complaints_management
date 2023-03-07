@@ -3,6 +3,8 @@ import 'package:complaints_management/screens/profile_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../api/controllers/auth/auth_api_controller.dart';
+import '../api/controllers/statuses/all_statuses_api_controller.dart';
+import '../models/all_statuses.dart';
 import '../widgets/box_widget.dart';
 import 'new_inbox_screen.dart';
 
@@ -18,6 +20,16 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   bool isClickOfficial = false;
   bool isClickOther = false;
+
+  List<Statuses> _statuses = <Statuses>[];
+
+  late Future<List<Statuses>> _future;
+
+  @override
+  void initState() {
+    _future = AllStatusesApiController().allStatuses();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -140,28 +152,59 @@ class _HomePageState extends State<HomePage> {
                     //
                     //
                     //
-
-                    Row(
-                      children: [
-                        BoxWidget(text: 'Inbox', num: 9, color: Colors.red),
-                        BoxWidget(
-                            text: 'Pending', num: 19, color: Colors.yellow)
-                      ],
+                    FutureBuilder<List<Statuses>>(
+                      future: _future,
+                      builder: (context, snapshot) {
+                        if (snapshot.connectionState ==
+                            ConnectionState.waiting) {
+                          return const Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        } else if (snapshot.hasData &&
+                            snapshot.data!.isNotEmpty) {
+                          _statuses = snapshot.data ?? [];
+                          return SizedBox(
+                            height: 192,
+                            child: Column(
+                              children: [
+                                Row(children: [
+                                  BoxWidget(
+                                      text: _statuses[0].name!,
+                                      num: int.parse(_statuses[0].mailsCount!),
+                                      color: Color(
+                                          int.parse(_statuses[0].color!))),
+                                  BoxWidget(
+                                      text: _statuses[1].name!,
+                                      num: int.parse(_statuses[1].mailsCount!),
+                                      color: Color(
+                                          int.parse(_statuses[1].color!))),
+                                ]),
+                                Row(children: [
+                                  BoxWidget(
+                                      text: _statuses[2].name!,
+                                      num: int.parse(_statuses[2].mailsCount!),
+                                      color: Color(
+                                          int.parse(_statuses[2].color!))),
+                                  BoxWidget(
+                                      text: _statuses[3].name!,
+                                      num: int.parse(_statuses[3].mailsCount!),
+                                      color: Color(
+                                          int.parse(_statuses[3].color!))),
+                                ]),
+                              ],
+                            ),
+                          );
+                        } else {
+                          return const Center(
+                            child: Text(
+                              'Error',
+                              style: TextStyle(
+                                  fontSize: 24, fontWeight: FontWeight.bold),
+                            ),
+                          );
+                        }
+                      },
                     ),
-                    Row(
-                      children: [
-                        BoxWidget(
-                            text: 'In progress', num: 5, color: Colors.blue),
-                        BoxWidget(
-                            text: 'Completed', num: 39, color: Colors.green)
-                      ],
-                    ),
-
-                    //
-                    //
-                    //
-                    //
-                    //
                     ListTile(
                       leading: const Text(
                         "Official Organization",
