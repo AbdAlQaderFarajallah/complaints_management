@@ -5,8 +5,8 @@ import '../../../models/all_statuses.dart';
 import '../../../prefs/shared_pref_controller.dart';
 import '../../api_settings.dart';
 
-class AllTagsApiController {
-  Future<List<Statuses>> allTags() async {
+class AllStatusesApiController {
+  Future<List<Statuses>> allStatuses() async {
     var url = Uri.parse(ApiSettings.allStatuses);
     var response = await http.get(url, headers: {
       HttpHeaders.authorizationHeader: SharedPrefController().token,
