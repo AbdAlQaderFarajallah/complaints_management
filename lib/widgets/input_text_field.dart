@@ -2,13 +2,12 @@ import 'package:flutter/material.dart';
 
 class InputTextField extends StatelessWidget {
   InputTextField(
-      {super.key,
-      required this.icon,
+      {super.key, this.icon,
       required this.hintText,
       required this.textController});
 
   late TextEditingController textController;
-  IconData icon;
+  IconData? icon;
   String hintText;
 
   @override
@@ -16,7 +15,7 @@ class InputTextField extends StatelessWidget {
     return TextField(
       controller: textController,
       decoration: InputDecoration(
-        prefixIcon: Icon(icon),
+        prefixIcon:icon==null?null: Icon(icon),
         prefixIconColor: const Color(0xFF6589FF),
         border: const UnderlineInputBorder(),
         hintText: hintText,
