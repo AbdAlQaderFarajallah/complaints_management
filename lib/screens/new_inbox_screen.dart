@@ -1,5 +1,10 @@
 import 'package:complaints_management/screens/category_screen.dart';
+import 'package:complaints_management/screens/status_screen.dart';
+import 'package:complaints_management/widgets/input_text_field.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+
+import 'tags_screen.dart';
 
 class NewInboxPage extends StatefulWidget {
   static const String id = "NewInboxPage";
@@ -13,8 +18,36 @@ class NewInboxPage extends StatefulWidget {
 class _NewInboxPageState extends State<NewInboxPage> {
   bool isClickTile = false;
   bool isClickActivity = false;
-
+  late TextEditingController senderTextEditingController;
+  late TextEditingController archiveNumberTextEditingController;
+  late TextEditingController titleOfMailTextEditingController;
+  late TextEditingController descriptionTextEditingController;
+  late TextEditingController decisionTextEditingController;
+  late TextEditingController newActivityTextEditingController;
   var resultCat = 'others';
+  DateTime _dateTime = DateTime.now();
+
+  @override
+  void initState() {
+    senderTextEditingController = TextEditingController();
+    archiveNumberTextEditingController = TextEditingController();
+    titleOfMailTextEditingController = TextEditingController();
+    descriptionTextEditingController = TextEditingController();
+    decisionTextEditingController = TextEditingController();
+    newActivityTextEditingController = TextEditingController();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    senderTextEditingController.dispose();
+    archiveNumberTextEditingController.dispose();
+    titleOfMailTextEditingController.dispose();
+    descriptionTextEditingController.dispose();
+    decisionTextEditingController.dispose();
+    newActivityTextEditingController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -23,41 +56,31 @@ class _NewInboxPageState extends State<NewInboxPage> {
       body: SafeArea(
         child: SingleChildScrollView(
           child: Container(
-            color: Colors.grey[300],
+            color: const Color(0xffF7F6FF),
             child: Column(
               children: [
                 Padding(
                   padding:
-                      const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      TextButton(
-                          onPressed: () {},
-                          child: const Text(
-                            "Cancel",
-                            style: TextStyle(color: Colors.blue, fontSize: 16),
-                          )),
-                      TextButton(
-                          onPressed: () {},
-                          child: const Text(
-                            "New Inbox",
-                            style: TextStyle(color: Colors.black, fontSize: 16),
-                          )),
-                      TextButton(
-                          onPressed: () {},
-                          child: const Text(
-                            "Done",
-                            style: TextStyle(color: Colors.blue, fontSize: 16),
-                          )),
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: const [
+                      Text(
+                        "New Inbox",
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold),
+                      ),
                     ],
                   ),
                 ),
                 Container(
                   width: 378,
-                  height: 130,
-                  margin: const EdgeInsets.only(left: 16, right: 16, bottom: 8),
-                  padding: const EdgeInsets.all(18),
+                  height: 150,
+                  margin:
+                      const EdgeInsets.only(left: 20, right: 20, bottom: 10),
+                  padding: const EdgeInsets.all(20),
                   decoration: const BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.all(Radius.circular(30)),
@@ -65,26 +88,17 @@ class _NewInboxPageState extends State<NewInboxPage> {
                   child: Column(
                     children: [
                       Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Row(children: const [
-                            Icon(
-                              Icons.person,
-                              color: Colors.grey,
-                            ),
-                            SizedBox(width: 8),
-                            Text(
-                              "Sender",
-                              style:
-                                  TextStyle(color: Colors.grey, fontSize: 16),
-                            ),
-                          ]),
+                          Expanded(
+                            child: InputTextField(
+                                icon: Icons.person,
+                                hintText: 'Sender',
+                                textController: senderTextEditingController),
+                          ),
                           const Icon(Icons.error_outline, color: Colors.blue),
                         ],
                       ),
-                      const SizedBox(height: 10),
-                      const Divider(thickness: 1, color: Colors.black54),
-                      const SizedBox(height: 10),
+                      const SizedBox(height: 25),
                       InkWell(
                         onTap: () {
                           _navigateAndDisplaySelection(context);
@@ -116,35 +130,34 @@ class _NewInboxPageState extends State<NewInboxPage> {
                   ),
                 ),
                 Container(
-                  margin: const EdgeInsets.only(left: 16, right: 16, bottom: 8),
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  margin:
+                      const EdgeInsets.only(left: 20, right: 20, bottom: 10),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
                   decoration: const BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.all(Radius.circular(30)),
                   ),
                   child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      TextFormField(
-                        keyboardType: TextInputType.text,
-                        decoration: const InputDecoration(
-                          border: InputBorder.none,
-                          hintText: "Title of mail",
-                        ),
+                      InputTextField(
+                        textController: titleOfMailTextEditingController,
+                        hintText: 'Title of Mail',
                       ),
-                      const Divider(thickness: 1, color: Colors.black54),
-                      TextFormField(
-                        keyboardType: TextInputType.text,
-                        decoration: const InputDecoration(
-                          border: InputBorder.none,
-                          hintText: "Description",
-                        ),
+                      const SizedBox(height: 10),
+                      InputTextField(
+                        textController: descriptionTextEditingController,
+                        hintText: 'Description',
                       ),
+                      const SizedBox(height: 10)
                     ],
                   ),
                 ),
                 Container(
-                  margin: const EdgeInsets.only(left: 16, right: 16, bottom: 8),
-                  padding: const EdgeInsets.all(16),
+                  margin:
+                      const EdgeInsets.only(left: 20, right: 20, bottom: 10),
+                  padding: const EdgeInsets.all(20),
                   decoration: const BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.all(Radius.circular(30)),
@@ -157,134 +170,148 @@ class _NewInboxPageState extends State<NewInboxPage> {
                             Icons.date_range,
                             color: Colors.blue,
                           ),
-                          const SizedBox(width: 8),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: const [
-                              Text(
-                                "Date",
-                                style: TextStyle(
-                                    color: Colors.black, fontSize: 18),
-                              ),
-                              Text(
-                                "Tuesday, July 5, 2022",
-                                style:
-                                    TextStyle(color: Colors.grey, fontSize: 16),
-                              )
-                            ],
+                          const SizedBox(width: 10),
+                          InkWell(
+                            onTap: () {
+                              _showDatePicker();
+                            },
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const Text(
+                                  "Date",
+                                  style: TextStyle(
+                                      color: Colors.black, fontSize: 18),
+                                ),
+                                Text(
+                                    DateFormat('yyyy-MM-dd').format(_dateTime)),
+                              ],
+                            ),
                           )
                         ],
                       ),
+                      const SizedBox(height: 5),
                       const Divider(thickness: 1, color: Colors.black54),
+                      const SizedBox(height: 5),
                       Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           const Icon(
                             Icons.description_rounded,
                             color: Colors.blue,
                           ),
-                          const SizedBox(width: 8),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: const [
-                              Text(
-                                "Archive number",
-                                style: TextStyle(
-                                    color: Colors.black, fontSize: 18),
-                              ),
-                              Text(
-                                "2022 / 6019",
-                                style:
-                                    TextStyle(color: Colors.grey, fontSize: 16),
-                              )
-                            ],
+                          const SizedBox(width: 10),
+                          const Text(
+                            "Archive number",
+                            style: TextStyle(color: Colors.black, fontSize: 18),
+                          ),
+                          const SizedBox(width: 20),
+                          SizedBox(
+                            width: 110,
+                            child: TextField(
+                              controller: archiveNumberTextEditingController,
+                              decoration: const InputDecoration(
+                                  border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(25))),
+                                  hintText: '2022/6019'),
+                            ),
                           )
                         ],
                       ),
                     ],
                   ),
                 ),
-                Container(
-                  margin: const EdgeInsets.only(left: 16, right: 16, bottom: 8),
-                  padding: const EdgeInsets.all(8),
-                  decoration: const BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.all(Radius.circular(40)),
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Row(
-                        children: const [
-                          SizedBox(width: 8),
-                          Icon(
-                            Icons.numbers,
-                            color: Colors.grey,
-                          ),
-                          SizedBox(width: 8),
-                          Text(
-                            "Tags",
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontWeight: FontWeight.bold,
+                InkWell(
+                  onTap: () {
+                    Navigator.pushNamed(context, TagsPage.id);
+                  },
+                  child: Container(
+                    height: 60,
+                    margin:
+                        const EdgeInsets.only(left: 20, right: 20, bottom: 10),
+                    padding: const EdgeInsets.all(10),
+                    decoration: const BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.all(Radius.circular(40)),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
+                          children: const [
+                            SizedBox(width: 8),
+                            Icon(
+                              Icons.numbers,
+                              color: Colors.grey,
                             ),
-                          )
-                        ],
-                      ),
-                      IconButton(
-                        onPressed: () {},
-                        icon: const Icon(
-                          Icons.arrow_forward_ios_outlined,
-                          color: Colors.grey,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Container(
-                  margin: const EdgeInsets.only(left: 16, right: 16, bottom: 8),
-                  padding: const EdgeInsets.all(8),
-                  decoration: const BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.all(Radius.circular(40)),
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Row(
-                        children: [
-                          const SizedBox(width: 8),
-                          const Icon(
-                            Icons.arrow_circle_down,
-                            color: Colors.grey,
-                          ),
-                          Container(
-                            margin: const EdgeInsets.only(left: 8),
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 16, vertical: 8),
-                            decoration: const BoxDecoration(
-                              color: Colors.red,
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(25)),
-                            ),
-                            child: const Center(
-                                child: Text(
-                              "Inbox",
+                            SizedBox(width: 8),
+                            Text(
+                              "Tags",
                               style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 16),
-                            )),
-                          ),
-                        ],
-                      ),
-                      IconButton(
-                        onPressed: () {},
-                        icon: const Icon(
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            )
+                          ],
+                        ),
+                        const Icon(
                           Icons.arrow_forward_ios_outlined,
                           color: Colors.grey,
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
+                  ),
+                ),
+                InkWell(
+                  onTap: () {
+                    Navigator.pushNamed(context, StatusPage.id);
+                  },
+                  child: Container(
+                    height: 60,
+                    margin:
+                        const EdgeInsets.only(left: 20, right: 20, bottom: 10),
+                    padding: const EdgeInsets.all(10),
+                    decoration: const BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.all(Radius.circular(40)),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
+                          children: [
+                            const SizedBox(width: 8),
+                            const Icon(
+                              Icons.adjust,
+                              color: Colors.grey,
+                            ),
+                            Container(
+                              margin: const EdgeInsets.only(left: 10),
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 20, vertical: 10),
+                              decoration: const BoxDecoration(
+                                color: Colors.red,
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(25)),
+                              ),
+                              child: const Center(
+                                  child: Text(
+                                "Inbox",
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 16),
+                              )),
+                            ),
+                          ],
+                        ),
+                        const Icon(
+                          Icons.arrow_forward_ios_outlined,
+                          color: Colors.grey,
+                        ),
+                      ],
+                    ),
                   ),
                 ),
                 Container(
@@ -305,19 +332,18 @@ class _NewInboxPageState extends State<NewInboxPage> {
                             fontWeight: FontWeight.bold,
                             fontSize: 18),
                       ),
-                      TextFormField(
-                        keyboardType: TextInputType.text,
-                        decoration: const InputDecoration(
-                          border: InputBorder.none,
-                          hintText: "Add Decision",
-                        ),
+                      InputTextField(
+                        hintText: 'Add Decision',
+                        textController: decisionTextEditingController,
                       ),
+                      const SizedBox(height: 10)
                     ],
                   ),
                 ),
                 Container(
-                  margin: const EdgeInsets.only(left: 16, right: 16, bottom: 8),
-                  padding: const EdgeInsets.all(18),
+                  margin:
+                      const EdgeInsets.only(left: 20, right: 20, bottom: 10),
+                  padding: const EdgeInsets.all(20),
                   decoration: const BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.all(Radius.circular(25)),
@@ -335,55 +361,56 @@ class _NewInboxPageState extends State<NewInboxPage> {
                     ],
                   ),
                 ),
-                ListTile(
-                  leading: const Text(
-                    "Activity",
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16,
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                  child: ListTile(
+                    leading: const Text(
+                      "Activity",
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16,
+                      ),
                     ),
-                  ),
-                  trailing: IconButton(
-                    icon: Icon(
-                        !isClickActivity
-                            ? Icons.keyboard_arrow_down_outlined
-                            : Icons.keyboard_arrow_up,
-                        color: Colors.black),
-                    onPressed: () {
-                      setState(() {
-                        isClickActivity = !isClickActivity;
-                      });
-                    },
+                    trailing: IconButton(
+                      icon: Icon(
+                          !isClickActivity
+                              ? Icons.keyboard_arrow_down_outlined
+                              : Icons.keyboard_arrow_up,
+                          color: Colors.black),
+                      onPressed: () {
+                        setState(() {
+                          isClickActivity = !isClickActivity;
+                        });
+                      },
+                    ),
                   ),
                 ),
                 !isClickActivity
                     ? Container(
+                        height: 70,
+                        padding: const EdgeInsets.all(20),
                         margin: const EdgeInsets.only(
-                            left: 16, right: 16, bottom: 8),
+                            left: 20, right: 20, bottom: 10),
                         decoration: const BoxDecoration(
                           color: Colors.white70,
-                          borderRadius: BorderRadius.all(Radius.circular(50)),
+                          borderRadius: BorderRadius.all(Radius.circular(25)),
                         ),
-                        child: TextField(
-                          onChanged: (value) {
-                            // Method For Searching
-                          },
-                          decoration: InputDecoration(
-                            hintText: "Add new activity...",
-                            prefixIcon: const Icon(Icons.person),
-                            suffixIcon: IconButton(
-                              onPressed: () {},
-                              icon: const Icon(
-                                Icons.send,
-                                color: Colors.blue,
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: InputTextField(
+                                hintText: 'Add New Activity...',
+                                textController:
+                                    newActivityTextEditingController,
+                                icon: Icons.person,
                               ),
                             ),
-                            border: const OutlineInputBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(50)),
-                            ),
-                          ),
+                            IconButton(
+                                onPressed: () {},
+                                icon:
+                                    const Icon(Icons.send, color: Colors.blue))
+                          ],
                         ),
                       )
                     : const SizedBox(),
@@ -405,5 +432,18 @@ class _NewInboxPageState extends State<NewInboxPage> {
     resultCat = result;
 
     setState(() {});
+  }
+
+  void _showDatePicker() {
+    showDatePicker(
+            context: context,
+            initialDate: DateTime.now(),
+            firstDate: DateTime(2000),
+            lastDate: DateTime(2025))
+        .then((value) {
+      setState(() {
+        _dateTime = value!;
+      });
+    });
   }
 }
