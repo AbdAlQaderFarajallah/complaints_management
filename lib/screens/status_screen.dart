@@ -53,7 +53,8 @@ class _StatusPageState extends State<StatusPage> {
                 } else if (snapshot.hasData && snapshot.data!.isNotEmpty) {
                   _statuses = snapshot.data ?? [];
                   return Container(
-                    margin: const EdgeInsets.only(left: 16, right: 16, bottom: 8),
+                    margin:
+                        const EdgeInsets.only(left: 16, right: 16, bottom: 8),
                     padding: const EdgeInsets.all(8),
                     decoration: const BoxDecoration(
                       color: Colors.white,
@@ -67,21 +68,32 @@ class _StatusPageState extends State<StatusPage> {
                         itemBuilder: (context, index) {
                           return Column(
                             children: [
-                              ListTile(
-                                  leading: Container(
-                                    height: 32,
-                                    width: 32,
-                                    decoration:  BoxDecoration(
-                                      color: Color(int.parse(_statuses[index].color!)),
-                                      borderRadius:
-                                          const BorderRadius.all(Radius.circular(8)),
+                              InkWell(
+                                onTap: () {
+                                  Navigator.pop(context, [
+                                    _statuses[index].color,
+                                    _statuses[index].name
+                                  ]);
+                                },
+                                child: ListTile(
+                                    leading: Container(
+                                      height: 32,
+                                      width: 32,
+                                      decoration: BoxDecoration(
+                                        color: Color(
+                                            int.parse(_statuses[index].color!)),
+                                        borderRadius: const BorderRadius.all(
+                                            Radius.circular(8)),
+                                      ),
                                     ),
-                                  ),
-                                  title: Text(
-                                    _statuses[index].name!,
-                                    style: const TextStyle(color: Colors.black),
-                                  )),
-                              const Divider(thickness: 1, color: Colors.black54),
+                                    title: Text(
+                                      _statuses[index].name!,
+                                      style:
+                                          const TextStyle(color: Colors.black),
+                                    )),
+                              ),
+                              const Divider(
+                                  thickness: 1, color: Colors.black54),
                             ],
                           );
                         },

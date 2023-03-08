@@ -24,7 +24,9 @@ class _NewInboxPageState extends State<NewInboxPage> {
   late TextEditingController descriptionTextEditingController;
   late TextEditingController decisionTextEditingController;
   late TextEditingController newActivityTextEditingController;
-  var resultCat = 'others';
+  var popResultCat = 'others';
+  var popStatusName = 'inbox';
+  var popStatusColor = '0xffFA3A57';
   DateTime _dateTime = DateTime.now();
 
   @override
@@ -101,7 +103,7 @@ class _NewInboxPageState extends State<NewInboxPage> {
                       const SizedBox(height: 25),
                       InkWell(
                         onTap: () {
-                          _navigateAndDisplaySelection(context);
+                          _navigateAndDisplaySelectionCategoryPage(context);
                         },
                         child: Expanded(
                           child: Row(
@@ -114,7 +116,7 @@ class _NewInboxPageState extends State<NewInboxPage> {
                               ),
                               Row(children: [
                                 Text(
-                                  resultCat.toString(),
+                                  popResultCat.toString(),
                                   style: const TextStyle(
                                       color: Colors.grey, fontSize: 15),
                                 ),
@@ -265,7 +267,7 @@ class _NewInboxPageState extends State<NewInboxPage> {
                 ),
                 InkWell(
                   onTap: () {
-                    Navigator.pushNamed(context, StatusPage.id);
+                    _navigateAndDisplaySelectionStatusPage(context);
                   },
                   child: Container(
                     height: 60,
@@ -290,15 +292,15 @@ class _NewInboxPageState extends State<NewInboxPage> {
                               margin: const EdgeInsets.only(left: 10),
                               padding: const EdgeInsets.symmetric(
                                   horizontal: 20, vertical: 10),
-                              decoration: const BoxDecoration(
-                                color: Colors.red,
+                              decoration:  BoxDecoration(
+                                color: Color(int.parse(popStatusColor)),
                                 borderRadius:
-                                    BorderRadius.all(Radius.circular(25)),
+                                    const BorderRadius.all(Radius.circular(25)),
                               ),
-                              child: const Center(
+                              child:  Center(
                                   child: Text(
-                                "Inbox",
-                                style: TextStyle(
+                                popStatusName,
+                                style: const TextStyle(
                                     color: Colors.white,
                                     fontWeight: FontWeight.bold,
                                     fontSize: 16),
@@ -422,14 +424,29 @@ class _NewInboxPageState extends State<NewInboxPage> {
     );
   }
 
-  Future<void> _navigateAndDisplaySelection(BuildContext context) async {
+  Future<void> _navigateAndDisplaySelectionCategoryPage(
+      BuildContext context) async {
     final result = await Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => const CategoryPage()),
     );
     if (!mounted) return;
 
-    resultCat = result;
+    popResultCat = result;
+
+    setState(() {});
+  }
+
+  Future<void> _navigateAndDisplaySelectionStatusPage(
+      BuildContext context) async {
+    final result1 = await Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => const StatusPage()),
+    );
+    if (!mounted) return;
+
+    popStatusColor = result1[0];
+    popStatusName = result1[1];
 
     setState(() {});
   }
