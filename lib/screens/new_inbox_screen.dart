@@ -1,3 +1,4 @@
+import 'package:complaints_management/api/controllers/mails/create_mali_api_controller.dart';
 import 'package:complaints_management/screens/category_screen.dart';
 import 'package:complaints_management/screens/status_screen.dart';
 import 'package:complaints_management/widgets/input_text_field.dart';
@@ -292,12 +293,12 @@ class _NewInboxPageState extends State<NewInboxPage> {
                               margin: const EdgeInsets.only(left: 10),
                               padding: const EdgeInsets.symmetric(
                                   horizontal: 20, vertical: 10),
-                              decoration:  BoxDecoration(
+                              decoration: BoxDecoration(
                                 color: Color(int.parse(popStatusColor)),
                                 borderRadius:
                                     const BorderRadius.all(Radius.circular(25)),
                               ),
-                              child:  Center(
+                              child: Center(
                                   child: Text(
                                 popStatusName,
                                 style: const TextStyle(
@@ -462,5 +463,18 @@ class _NewInboxPageState extends State<NewInboxPage> {
         _dateTime = value!;
       });
     });
+  }
+
+  Future<void> createMail() async {
+    await CreateMailApiController().createMali(
+        activities: newActivityTextEditingController.text,
+        archiveDate: _dateTime,
+        archiveNumber: archiveNumberTextEditingController.text,
+        decision: decisionTextEditingController.text,
+        description: descriptionTextEditingController.text,
+        senderId: senderTextEditingController.text,
+        statusId: popStatusName,
+        subject: titleOfMailTextEditingController.text,
+        tags: popResultCat);
   }
 }

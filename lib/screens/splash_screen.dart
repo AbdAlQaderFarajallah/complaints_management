@@ -29,7 +29,7 @@ class _SplashPageState extends State<SplashPage>
     });
     Timer(const Duration(seconds: 3), () {
       String route =
-          SharedPrefController().loggedIn ? ShimmerAnimation.id : LoginAndSignupPage.id;
+          SharedPrefController().loggedIn ? HomePage.id : LoginAndSignupPage.id;
       Navigator.pushReplacementNamed(context, route);
     });
   }
@@ -43,6 +43,7 @@ class _SplashPageState extends State<SplashPage>
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
         body: SafeArea(
           child: Center(

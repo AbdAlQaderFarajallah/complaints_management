@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:http/http.dart' as http;
-import '../../../models/all_statuses.dart';
+import '../../../models/status/all_statuses.dart';
 import '../../../prefs/shared_pref_controller.dart';
 import '../../api_settings.dart';
 

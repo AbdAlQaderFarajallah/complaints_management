@@ -1,10 +1,11 @@
 import 'package:complaints_management/screens/login_and_signup.dart';
 import 'package:complaints_management/screens/profile_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:shimmer/shimmer.dart';
 
 import '../api/controllers/auth/auth_api_controller.dart';
 import '../api/controllers/statuses/all_statuses_api_controller.dart';
-import '../models/all_statuses.dart';
+import '../models/status/all_statuses.dart';
 import '../widgets/box_widget.dart';
 import 'new_inbox_screen.dart';
 
@@ -157,9 +158,108 @@ class _HomePageState extends State<HomePage> {
                       builder: (context, snapshot) {
                         if (snapshot.connectionState ==
                             ConnectionState.waiting) {
-                          return const Center(
-                            child: CircularProgressIndicator(),
-                          );
+                          return Center(
+                              child: SizedBox(
+                            height: 192,
+                            child: Column(
+                              children: [
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Shimmer.fromColors(
+                                      baseColor: Colors.grey[400]!,
+                                      highlightColor: Colors.grey[300]!,
+                                      child: Container(
+                                        width: 165,
+                                        height: 60,
+                                        margin: const EdgeInsets.only(
+                                            top: 8, left: 16, right: 8),
+                                        padding: const EdgeInsets.only(
+                                            top: 16,
+                                            left: 16,
+                                            right: 16,
+                                            bottom: 8),
+                                        decoration: const BoxDecoration(
+                                          color: Colors.white,
+                                          borderRadius: BorderRadius.all(
+                                            Radius.circular(20),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    Shimmer.fromColors(
+                                      baseColor: Colors.grey[400]!,
+                                      highlightColor: Colors.grey[300]!,
+                                      child: Container(
+                                        width: 165,
+                                        height: 60,
+                                        margin: const EdgeInsets.only(
+                                            top: 8, left: 16, right: 8),
+                                        padding: const EdgeInsets.only(
+                                            top: 16,
+                                            left: 16,
+                                            right: 16,
+                                            bottom: 8),
+                                        decoration: const BoxDecoration(
+                                          color: Colors.white,
+                                          borderRadius: BorderRadius.all(
+                                            Radius.circular(20),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Shimmer.fromColors(
+                                      baseColor: Colors.grey[400]!,
+                                      highlightColor: Colors.grey[300]!,
+                                      child: Container(
+                                        width: 165,
+                                        height: 60,
+                                        margin: const EdgeInsets.only(
+                                            top: 8, left: 16, right: 8),
+                                        padding: const EdgeInsets.only(
+                                            top: 16,
+                                            left: 16,
+                                            right: 16,
+                                            bottom: 8),
+                                        decoration: const BoxDecoration(
+                                          color: Colors.white,
+                                          borderRadius: BorderRadius.all(
+                                            Radius.circular(20),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    Shimmer.fromColors(
+                                      baseColor: Colors.grey[400]!,
+                                      highlightColor: Colors.grey[300]!,
+                                      child: Container(
+                                        width: 165,
+                                        height: 60,
+                                        margin: const EdgeInsets.only(
+                                            top: 8, left: 16, right: 8),
+                                        padding: const EdgeInsets.only(
+                                            top: 16,
+                                            left: 16,
+                                            right: 16,
+                                            bottom: 8),
+                                        decoration: const BoxDecoration(
+                                          color: Colors.white,
+                                          borderRadius: BorderRadius.all(
+                                            Radius.circular(20),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ));
                         } else if (snapshot.hasData &&
                             snapshot.data!.isNotEmpty) {
                           _statuses = snapshot.data ?? [];

@@ -1,4 +1,4 @@
-import 'package:complaints_management/models/all_statuses.dart';
+import 'package:complaints_management/models/status/all_statuses.dart';
 import 'package:flutter/material.dart';
 
 import '../api/controllers/statuses/all_statuses_api_controller.dart';
@@ -26,7 +26,7 @@ class _StatusPageState extends State<StatusPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey.shade300,
+      backgroundColor: const Color(0xffF7F6FF),
       body: SafeArea(
         child: Column(
           children: [
