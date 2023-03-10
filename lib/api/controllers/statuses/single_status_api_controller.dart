@@ -1,0 +1,24 @@
+import 'dart:convert';
+import 'dart:io';
+import 'package:complaints_management/models/status/single_status.dart';
+import 'package:http/http.dart' as http;
+import '../../../prefs/shared_pref_controller.dart';
+import '../../api_settings.dart';
+
+class SingleStatusApiController {
+  Future<List<Mails>> singleStatus({String? id}) async {
+    var url = Uri.parse('${ApiSettings.allStatuses}/$id?mail=true');
+    var response = await http.get(url, headers: {
+      HttpHeaders.authorizationHeader: SharedPrefController().token,
+      HttpHeaders.acceptHeader: 'application/json'
+    });
+
+    if (response.statusCode == 200) {
+      var jsonObject = jsonDecode(response.body);
+      SingleStatus status = SingleStatus.fromJson(jsonObject);
+      print(status);
+      return status.status!.mails!;
+    } else {}
+    return [];
+  }
+}
