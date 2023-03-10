@@ -1,5 +1,6 @@
 import 'package:complaints_management/screens/login_and_signup.dart';
 import 'package:complaints_management/screens/profile_screen.dart';
+import 'package:complaints_management/screens/search_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 
@@ -128,21 +129,26 @@ class _HomePageState extends State<HomePage> {
                     //
 
                     //Search
-                    Container(
-                      margin: const EdgeInsets.symmetric(
-                          vertical: 8, horizontal: 20),
-                      decoration: const BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.all(Radius.circular(50))),
-                      child: TextField(
-                        onChanged: (value) {
-                          // Method For Searching
-                        },
-                        decoration: const InputDecoration(
-                          hintText: "Search",
-                          prefixIcon: Icon(Icons.search),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(50)),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.pushNamed(context, SearchPage.id);
+                      },
+                      child: Container(
+                        margin: const EdgeInsets.symmetric(
+                            vertical: 8, horizontal: 20),
+                        decoration: const BoxDecoration(
+                            color: Colors.white,
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(50))),
+                        child: const TextField(
+                          enabled: false,
+                          decoration: InputDecoration(
+                            hintText: "Search",
+                            prefixIcon: Icon(Icons.search),
+                            border: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(50)),
+                            ),
                           ),
                         ),
                       ),
