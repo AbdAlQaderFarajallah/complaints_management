@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import '../api/controllers/category/all_categories_api_controller.dart';
+import '../api/controllers/search/search_api_controller.dart';
 import '../api/controllers/statuses/all_statuses_api_controller.dart';
 import '../models/all_categories.dart';
+import '../models/search.dart';
 import '../models/status/all_statuses.dart';
 
 class FiltersScreen extends StatefulWidget {
@@ -21,8 +23,11 @@ class _FiltersScreenState extends State<FiltersScreen> {
 
   List<Statuses> _statuses = <Statuses>[];
   late Future<List<Statuses>> _futureStatus;
+  List<Mails> _search = <Mails>[];
   DateTime _dateTimeFrom = DateTime.now();
   DateTime _dateTimeTo = DateTime.now();
+
+  late String statusId;
 
   @override
   void initState() {
@@ -40,9 +45,9 @@ class _FiltersScreenState extends State<FiltersScreen> {
           padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 20.0),
           child: Column(
             children: [
-              const SizedBox(height: 10),
+              const SizedBox(height: 5),
               Container(
-                height: 250,
+                height: 240,
                 margin: const EdgeInsets.only(left: 16, right: 16, bottom: 8),
                 padding: const EdgeInsets.all(8),
                 decoration: const BoxDecoration(
@@ -64,10 +69,7 @@ class _FiltersScreenState extends State<FiltersScreen> {
                           itemCount: _categories.length,
                           itemBuilder: (context, index) {
                             return InkWell(
-                                onTap: () {
-                                  Navigator.pop(
-                                      context, _categories[index].name);
-                                },
+                                onTap: () {},
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
@@ -100,9 +102,9 @@ class _FiltersScreenState extends State<FiltersScreen> {
                   },
                 ),
               ),
-              const SizedBox(height: 10),
+              const SizedBox(height: 5),
               Container(
-                height: 300,
+                height: 290,
                 margin: const EdgeInsets.only(left: 16, right: 16, bottom: 8),
                 padding: const EdgeInsets.all(8),
                 decoration: const BoxDecoration(
@@ -128,10 +130,8 @@ class _FiltersScreenState extends State<FiltersScreen> {
                               children: [
                                 InkWell(
                                   onTap: () {
-                                    Navigator.pop(context, [
-                                      _statuses[index].color,
-                                      _statuses[index].name
-                                    ]);
+                                    statusId = _statuses[index].id.toString();
+                                    setState(() {});
                                   },
                                   child: ListTile(
                                       leading: Container(
@@ -169,7 +169,7 @@ class _FiltersScreenState extends State<FiltersScreen> {
                   },
                 ),
               ),
-              const SizedBox(height: 10),
+              const SizedBox(height: 5),
               Container(
                 margin: const EdgeInsets.only(left: 16, right: 16),
                 padding: const EdgeInsets.all(20),
@@ -225,6 +225,22 @@ class _FiltersScreenState extends State<FiltersScreen> {
                   ],
                 ),
               ),
+              TextButton(
+                onPressed: () {
+                  SearchApiController()
+                      .search(
+                          statusId: statusId,
+                          start: _dateTimeFrom.toString(),
+                          end: _dateTimeTo.toString())
+                      .then((value) {
+                    _search = value;
+                  });
+                  setState(() {});
+                  Future.delayed(const Duration(seconds: 5),
+                      () => Navigator.pop(context, _search));
+                },
+                child: const Text('Save'),
+              )
             ],
           ),
         ),

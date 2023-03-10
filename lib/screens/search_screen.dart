@@ -87,7 +87,7 @@ class _SearchPageState extends State<SearchPage> {
                   const SizedBox(width: 10),
                   InkWell(
                     onTap: () {
-                      Navigator.pushNamed(context, FiltersScreen.id);
+                      _navigateAndDisplaySelection(context);
                     },
                     child: const Icon(
                       size: 30,
@@ -188,7 +188,7 @@ class _SearchPageState extends State<SearchPage> {
                                 padding:
                                     const EdgeInsets.symmetric(horizontal: 24),
                                 child: Text(
-                                  _search[index].tags![0].name!,
+                                  _search[index].sender!.name!,
                                   overflow: TextOverflow.ellipsis,
                                   maxLines: 1,
                                   style: const TextStyle(
@@ -235,5 +235,15 @@ class _SearchPageState extends State<SearchPage> {
         ),
       ),
     );
+  }
+
+  Future<void> _navigateAndDisplaySelection(BuildContext context) async {
+    final result = await Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => const FiltersScreen()),
+    );
+    if (!mounted) return;
+    _search = result;
+    setState(() {});
   }
 }
