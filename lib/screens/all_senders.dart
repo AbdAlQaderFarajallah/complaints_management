@@ -1,5 +1,5 @@
 import 'package:complaints_management/api/controllers/senders/all_senders_api_controller.dart';
-import 'package:complaints_management/models/senders/all_senders.dart';
+import 'package:complaints_management/models/all_senders.dart';
 import 'package:flutter/material.dart';
 
 class AllSenderScreen extends StatefulWidget {
@@ -19,7 +19,7 @@ class _AllSenderScreenState extends State<AllSenderScreen> {
     AllSendersApiController().allSenders().then((value) {
       _senders = value;
     });
-    Future.delayed(const Duration(seconds: 5), () {
+    Future.delayed(const Duration(seconds: 7), () {
       setState(() {});
     });
     super.initState();

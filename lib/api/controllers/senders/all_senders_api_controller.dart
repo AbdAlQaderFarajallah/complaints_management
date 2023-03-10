@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
-import 'package:complaints_management/models/senders/all_senders.dart';
+import 'package:complaints_management/models/all_senders.dart';
 import 'package:http/http.dart' as http;
 import '../../../prefs/shared_pref_controller.dart';
 import '../../api_settings.dart';
