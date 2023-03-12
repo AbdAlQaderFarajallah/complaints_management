@@ -1,6 +1,6 @@
 import 'package:complaints_management/api/controllers/category/all_categories_api_controller.dart';
 import 'package:complaints_management/api/controllers/category/create_category_api_controller.dart';
-import 'package:complaints_management/models/all_categories.dart';
+import 'package:complaints_management/models/category/all_categories.dart';
 import 'package:complaints_management/widgets/input_text_field.dart';
 import 'package:flutter/material.dart';
 

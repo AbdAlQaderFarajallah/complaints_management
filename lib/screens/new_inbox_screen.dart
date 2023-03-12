@@ -1,4 +1,5 @@
 import 'package:complaints_management/api/controllers/mails/create_mali_api_controller.dart';
+import 'package:complaints_management/screens/all_senders.dart';
 import 'package:complaints_management/screens/category_screen.dart';
 import 'package:complaints_management/screens/status_screen.dart';
 import 'package:complaints_management/widgets/input_text_field.dart';
@@ -26,9 +27,12 @@ class _NewInboxPageState extends State<NewInboxPage> {
   late TextEditingController decisionTextEditingController;
   late TextEditingController newActivityTextEditingController;
   var popResultCat = 'others';
-  var popStatusName = 'inbox';
+  String popStatusName = 'inbox';
+  int popStatusId = 1;
   var popStatusColor = '0xffFA3A57';
   DateTime _dateTime = DateTime.now();
+  int senderId = 1;
+  String senderName = '';
 
   @override
   void initState() {
@@ -95,10 +99,16 @@ class _NewInboxPageState extends State<NewInboxPage> {
                           Expanded(
                             child: InputTextField(
                                 icon: Icons.person,
-                                hintText: 'Sender',
+                                hintText: senderName,
                                 textController: senderTextEditingController),
                           ),
-                          const Icon(Icons.error_outline, color: Colors.blue),
+                          IconButton(
+                              onPressed: () {
+                                _navigateAndDisplaySelectionSenderScreen(
+                                    context);
+                              },
+                              icon: const Icon(Icons.error_outline),
+                              color: Colors.blue),
                         ],
                       ),
                       const SizedBox(height: 25),
@@ -410,7 +420,9 @@ class _NewInboxPageState extends State<NewInboxPage> {
                               ),
                             ),
                             IconButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                    createMail();
+                                },
                                 icon:
                                     const Icon(Icons.send, color: Colors.blue))
                           ],
@@ -448,7 +460,19 @@ class _NewInboxPageState extends State<NewInboxPage> {
 
     popStatusColor = result1[0];
     popStatusName = result1[1];
+    popStatusId = result1[2];
+    setState(() {});
+  }
 
+  Future<void> _navigateAndDisplaySelectionSenderScreen(
+      BuildContext context) async {
+    final result = await Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => const AllSenderScreen()),
+    );
+    if (!mounted) return;
+    senderId = result[0];
+    senderName = result[1];
     setState(() {});
   }
 
@@ -467,14 +491,12 @@ class _NewInboxPageState extends State<NewInboxPage> {
 
   Future<void> createMail() async {
     await CreateMailApiController().createMali(
-        activities: newActivityTextEditingController.text,
-        archiveDate: _dateTime,
+        archiveDate: _dateTime.toString(),
         archiveNumber: archiveNumberTextEditingController.text,
         decision: decisionTextEditingController.text,
         description: descriptionTextEditingController.text,
-        senderId: senderTextEditingController.text,
-        statusId: popStatusName,
-        subject: titleOfMailTextEditingController.text,
-        tags: popResultCat);
+        senderId: senderId.toString(),
+        statusId: popStatusId.toString(),
+        subject: titleOfMailTextEditingController.text);
   }
 }

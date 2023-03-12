@@ -72,7 +72,8 @@ class _StatusPageState extends State<StatusPage> {
                                 onTap: () {
                                   Navigator.pop(context, [
                                     _statuses[index].color,
-                                    _statuses[index].name
+                                    _statuses[index].name,
+                                    _statuses[index].id
                                   ]);
                                 },
                                 child: ListTile(

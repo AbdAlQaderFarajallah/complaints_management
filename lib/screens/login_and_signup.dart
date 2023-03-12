@@ -1,4 +1,4 @@
-import 'package:complaints_management/screens/shimmer_animation.dart';
+
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../api/controllers/auth/auth_api_controller.dart';
@@ -189,76 +189,78 @@ class _LoginAndSignupPageState extends State<LoginAndSignupPage>
                               //
                               //
 
-                              Column(
-                                children: [
-                                  InputTextField(
-                                    icon: Icons.email,
-                                    hintText: 'Enter Email',
-                                    textController: _emailTextController,
-                                  ),
-                                  const SizedBox(height: 10),
-                                  InputTextField(
-                                    icon: Icons.person,
-                                    hintText: 'Enter Name',
-                                    textController: _nameTextController,
-                                  ),
-                                  const SizedBox(height: 10),
-                                  InputTextField(
-                                    icon: Icons.lock,
-                                    hintText: 'Password',
-                                    textController: _passwordTextController,
-                                  ),
-                                  const SizedBox(height: 10),
-                                  InputTextField(
-                                    icon: Icons.lock,
-                                    hintText: 'Confirm password',
-                                    textController: _passwordTextController,
-                                  ),
-                                  const SizedBox(height: 30),
-                                  SizedBox(
-                                    height: 50.0,
-                                    width: 264,
-                                    child: ElevatedButton(
-                                        style: ElevatedButton.styleFrom(
-                                            padding: const EdgeInsets.all(5),
-                                            backgroundColor:
-                                            const Color(0xFF003AFC),
-                                            shape: const StadiumBorder()),
-                                        onPressed: () async {
-                                          if(isLoading) return ;
-                                          setState(() {
-                                            isLoading = true ;
-                                          });
-                                          await Future.delayed(const Duration(seconds: 2) , () async => await performRegister());
-                                          setState(() {
-                                            isLoading = false ;
-                                          });
-                                        },
-                                        child: isLoading
-                                            ? const CircularProgressIndicator(
-                                            color: Colors.white)
-                                            : const Text('SIGN UP')),
-                                  ),
-                                  const SizedBox(height: 24),
-                                  Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: const [
-                                        Text("OR",
-                                            style:
-                                                TextStyle(color: Colors.grey)),
-                                      ]),
-                                  const SizedBox(height: 24),
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      SignUpIcon(name: 'images/Group1.svg'),
-                                      const SizedBox(width: 50),
-                                      SignUpIcon(name: 'images/Group2.svg'),
-                                    ],
-                                  ),
-                                  const SizedBox(height: 12),
-                                ],
+                              SingleChildScrollView(
+                                child: Column(
+                                  children: [
+                                    InputTextField(
+                                      icon: Icons.email,
+                                      hintText: 'Enter Email',
+                                      textController: _emailTextController,
+                                    ),
+                                    const SizedBox(height: 10),
+                                    InputTextField(
+                                      icon: Icons.person,
+                                      hintText: 'Enter Name',
+                                      textController: _nameTextController,
+                                    ),
+                                    const SizedBox(height: 10),
+                                    InputTextField(
+                                      icon: Icons.lock,
+                                      hintText: 'Password',
+                                      textController: _passwordTextController,
+                                    ),
+                                    const SizedBox(height: 10),
+                                    InputTextField(
+                                      icon: Icons.lock,
+                                      hintText: 'Confirm password',
+                                      textController: _passwordTextController,
+                                    ),
+                                    const SizedBox(height: 30),
+                                    SizedBox(
+                                      height: 50.0,
+                                      width: 264,
+                                      child: ElevatedButton(
+                                          style: ElevatedButton.styleFrom(
+                                              padding: const EdgeInsets.all(5),
+                                              backgroundColor:
+                                              const Color(0xFF003AFC),
+                                              shape: const StadiumBorder()),
+                                          onPressed: () async {
+                                            if(isLoading) return ;
+                                            setState(() {
+                                              isLoading = true ;
+                                            });
+                                            await Future.delayed(const Duration(seconds: 2) , () async => await performRegister());
+                                            setState(() {
+                                              isLoading = false ;
+                                            });
+                                          },
+                                          child: isLoading
+                                              ? const CircularProgressIndicator(
+                                              color: Colors.white)
+                                              : const Text('SIGN UP')),
+                                    ),
+                                    const SizedBox(height: 24),
+                                    Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: const [
+                                          Text("OR",
+                                              style:
+                                                  TextStyle(color: Colors.grey)),
+                                        ]),
+                                    const SizedBox(height: 24),
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                        SignUpIcon(name: 'images/Group1.svg'),
+                                        const SizedBox(width: 50),
+                                        SignUpIcon(name: 'images/Group2.svg'),
+                                      ],
+                                    ),
+                                    const SizedBox(height: 12),
+                                  ],
+                                ),
                               ),
                             ],
                           ),
@@ -298,7 +300,7 @@ class _LoginAndSignupPageState extends State<LoginAndSignupPage>
       password: _passwordTextController.text,
     );
     if (status) {
-      Navigator.pushReplacementNamed(context, ShimmerAnimation.id);
+      Navigator.pushReplacementNamed(context, HomePage.id);
     }
   }
 

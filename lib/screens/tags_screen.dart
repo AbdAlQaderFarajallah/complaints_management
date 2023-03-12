@@ -41,77 +41,68 @@ class _TagsPageState extends State<TagsPage> {
       body: SafeArea(
         child: Column(
           children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+            Container(
+              margin: const EdgeInsets.symmetric(vertical: 20),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  TextButton(
-                      onPressed: () {},
-                      child: const Text(
-                        "Cancel",
-                        style: TextStyle(color: Colors.blue, fontSize: 16),
-                      )),
-                  TextButton(
-                      onPressed: () {},
-                      child: const Text(
-                        "Tags",
-                        style: TextStyle(color: Colors.black, fontSize: 16),
-                      )),
-                  TextButton(
-                      onPressed: () {},
-                      child: const Text(
-                        "Done",
-                        style: TextStyle(color: Colors.blue, fontSize: 16),
-                      )),
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: const [
+                  Text(
+                    "Tags",
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold),
+                  ),
                 ],
               ),
             ),
             const SizedBox(height: 16),
-            FutureBuilder<List<Tags>>(
-              future: _future,
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const Center(
-                    child: CircularProgressIndicator(),
-                  );
-                } else if (snapshot.hasData && snapshot.data!.isNotEmpty) {
-                  _tags = snapshot.data ?? [];
-                  return Expanded(
-                    child: ListView.builder(
-                      shrinkWrap: true,
-                      itemCount: _tags.length,
-                      itemBuilder: (context, index) {
-                        return InkWell(
-                            onTap: () {},
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      vertical: 10, horizontal: 20),
-                                  child: TagWidget(
-                                      name: _tags[index].name.toString()),
-                                ),
-                                const Divider(
-                                  thickness: 1,
-                                  color: Colors.black54,
-                                )
-                              ],
-                            ));
-                      },
-                    ),
-                  );
-                } else {
-                  return const Center(
-                    child: Text(
-                      'Error',
-                      style:
-                          TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-                    ),
-                  );
-                }
-              },
+            Expanded(
+              child: FutureBuilder<List<Tags>>(
+                future: _future,
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  } else if (snapshot.hasData && snapshot.data!.isNotEmpty) {
+                    _tags = snapshot.data ?? [];
+                    return Expanded(
+                      child: ListView.builder(
+                        shrinkWrap: true,
+                        itemCount: _tags.length,
+                        itemBuilder: (context, index) {
+                          return InkWell(
+                              onTap: () {},
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 10, horizontal: 20),
+                                    child: TagWidget(
+                                        name: _tags[index].name.toString()),
+                                  ),
+                                  const Divider(
+                                    thickness: 1,
+                                    color: Colors.black54,
+                                  )
+                                ],
+                              ));
+                        },
+                      ),
+                    );
+                  } else {
+                    return const Center(
+                      child: Text(
+                        'Error',
+                        style: TextStyle(
+                            fontSize: 24, fontWeight: FontWeight.bold),
+                      ),
+                    );
+                  }
+                },
+              ),
             ),
             Container(
               height: 54,

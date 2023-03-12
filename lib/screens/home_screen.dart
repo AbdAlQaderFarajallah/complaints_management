@@ -32,11 +32,9 @@ class _HomePageState extends State<HomePage> {
   late Future<List<Statuses>> _future;
 
   List<Mail> _mails1 = <Mail>[];
-  List<Mail> _mails2 = <Mail>[];
   List<Mail> _mails3 = <Mail>[];
   List<Mail> _mails4 = <Mail>[];
   late Future<List<Mail>> _futureSenders1;
-  late Future<List<Mail>> _futureSenders2;
   late Future<List<Mail>> _futureSenders3;
   late Future<List<Mail>> _futureSenders4;
 
@@ -45,8 +43,6 @@ class _HomePageState extends State<HomePage> {
     _future = AllStatusesApiController().allStatuses();
     _futureSenders1 =
         MailsOfCategoriesApiController().mailsOfCategories(id: '1');
-    _futureSenders2 =
-        MailsOfCategoriesApiController().mailsOfCategories(id: '2');
     _futureSenders3 =
         MailsOfCategoriesApiController().mailsOfCategories(id: '3');
     _futureSenders4 =

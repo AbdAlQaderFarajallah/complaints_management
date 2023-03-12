@@ -3,7 +3,7 @@ import 'package:intl/intl.dart';
 import '../api/controllers/category/all_categories_api_controller.dart';
 import '../api/controllers/search/search_api_controller.dart';
 import '../api/controllers/statuses/all_statuses_api_controller.dart';
-import '../models/all_categories.dart';
+import '../models/category/all_categories.dart';
 import '../models/search.dart';
 import '../models/status/all_statuses.dart';
 

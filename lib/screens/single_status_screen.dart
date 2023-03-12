@@ -5,8 +5,9 @@ import '../models/status/single_status.dart';
 
 class SingleStatusScreen extends StatefulWidget {
   static const String id = "SingleStatusPage";
+  final String data;
 
-  const SingleStatusScreen({Key? key}) : super(key: key);
+  SingleStatusScreen({required this.data}) : super();
 
   @override
   State<SingleStatusScreen> createState() => _SingleStatusScreenState();
@@ -20,9 +21,8 @@ class _SingleStatusScreenState extends State<SingleStatusScreen> {
   @override
   void initState() {
     super.initState();
-    _future = SingleStatusApiController().singleStatus(id: '1');
+    _future = SingleStatusApiController().singleStatus(id: widget.data);
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +54,8 @@ class _SingleStatusScreenState extends State<SingleStatusScreen> {
                 } else if (snapshot.hasData && snapshot.data!.isNotEmpty) {
                   _mails = snapshot.data ?? [];
                   return Container(
-                    margin: const EdgeInsets.only(left: 16, right: 16, bottom: 8),
+                    margin:
+                        const EdgeInsets.only(left: 16, right: 16, bottom: 8),
                     padding: const EdgeInsets.all(8),
                     decoration: const BoxDecoration(
                       color: Colors.white,
@@ -67,23 +68,138 @@ class _SingleStatusScreenState extends State<SingleStatusScreen> {
                           return Column(
                             children: [
                               InkWell(
-                                onTap: () {},
-                                child: ListTile(
-                                    leading: Container(
-                                      height: 32,
-                                      width: 32,
+                                  onTap: () {},
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Container(
+                                      margin: const EdgeInsets.only(
+                                          left: 16, right: 16),
+                                      padding: const EdgeInsets.all(8),
                                       decoration: const BoxDecoration(
-                                        color: Colors.blue,
+                                        color: Colors.white,
                                         borderRadius: BorderRadius.all(
-                                            Radius.circular(8)),
+                                            Radius.circular(25)),
+                                      ),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Row(
+                                                children: [
+                                                  Container(
+                                                    height: 12,
+                                                    width: 12,
+                                                    decoration:
+                                                        const BoxDecoration(
+                                                      color: Colors.blue,
+                                                      borderRadius:
+                                                          BorderRadius.all(
+                                                        Radius.circular(50),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  const SizedBox(
+                                                    width: 8,
+                                                  ),
+                                                  Text(
+                                                    _mails[index]
+                                                        .subject
+                                                        .toString(),
+                                                    style: const TextStyle(
+                                                      color: Colors.black,
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      fontSize: 16,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                              Row(
+                                                children: [
+                                                  Padding(
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            8.0),
+                                                    child: Text(
+                                                      _mails[index]
+                                                          .sender!
+                                                          .name
+                                                          .toString(),
+                                                      style: const TextStyle(
+                                                          color: Colors.grey),
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ],
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.symmetric(
+                                                horizontal: 24),
+                                            child: Text(
+                                              _mails[index]
+                                                  .description
+                                                  .toString(),
+                                              style: const TextStyle(
+                                                  color: Colors.black,
+                                                  fontWeight: FontWeight.normal,
+                                                  fontSize: 15),
+                                            ),
+                                          ),
+                                          const SizedBox(height: 8),
+                                          Padding(
+                                            padding: const EdgeInsets.symmetric(
+                                                horizontal: 24),
+                                            child: Text(
+                                              _mails[index].decision.toString(),
+                                              overflow: TextOverflow.ellipsis,
+                                              maxLines: 1,
+                                              style: const TextStyle(
+                                                color: Colors.blue,
+                                                fontWeight: FontWeight.normal,
+                                                fontSize: 16,
+                                              ),
+                                            ),
+                                          ),
+                                          const SizedBox(height: 8),
+                                          Padding(
+                                            padding: const EdgeInsets.symmetric(
+                                                horizontal: 24),
+                                            child: Row(
+                                              children: [
+                                                Container(
+                                                  height: 42,
+                                                  width: 42,
+                                                  decoration:
+                                                      const BoxDecoration(
+                                                    color: Colors.grey,
+                                                    borderRadius:
+                                                        BorderRadius.all(
+                                                      Radius.circular(8),
+                                                    ),
+                                                  ),
+                                                  child: Center(
+                                                    child: Image.asset(
+                                                      "images/person.png",
+                                                      width: 36,
+                                                      height: 36,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ],
                                       ),
                                     ),
-                                    title: Text(
-                                      _mails[index].subject!,
-                                      style: const TextStyle(color: Colors.black),
-                                    )),
-                              ),
-                              const Divider(thickness: 1, color: Colors.black54),
+                                  )),
+                              const Divider(
+                                  thickness: 1, color: Colors.black54),
+                              const SizedBox(height: 15)
                             ],
                           );
                         },
@@ -94,7 +210,8 @@ class _SingleStatusScreenState extends State<SingleStatusScreen> {
                   return const Center(
                     child: Text(
                       'Error',
-                      style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                      style:
+                          TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                     ),
                   );
                 }
