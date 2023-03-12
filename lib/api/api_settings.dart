@@ -11,4 +11,5 @@ class ApiSettings {
   static const allStatuses = '$_baseUrl/statuses';
   static const createMail = '$_baseUrl/mails';
   static const search = '$_baseUrl/search';
+  static const allSenders = '$_baseUrl/senders';
 }
